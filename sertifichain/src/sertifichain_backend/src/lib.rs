@@ -17,15 +17,20 @@ thread_local! {
 }
 
 #[update]
-fn transfer_ownership(id: CertificateId, new_owner: String) -> String {
-    unsafe {
-        let certs = CERTIFICATES.get_or_insert_with(HashMap::new);
-        if let Some(cert) = certs.get_mut(&id) {
-            cert.owner = new_owner.clone();
-            return format!("Certificate {} ownership transferred to {}", id, new_owner);
-        }
-        format!("Error: Certificate not found")
+fn issue_certificate(id: CertificateId, owner: String, location: String, size: f64, issued_by: String) -> String {
+    let mut certs: HashMap<CertificateId, LandCertificate> = storage::stable_restore().unwrap_or_default();
+    if certs.contains_key(&id) {
+        return format!("Certificate {} already exists!", id);
     }
+    let cert = LandCertificate {
+        owner: owner.clone(),
+        location,
+        size,
+        issued_by,
+    };
+    certs.insert(id, cert);
+    storage::stable_save((certs,)).unwrap();
+    format!("Certificate {} issued to {}", id, owner)
 }
 
 #[update]
