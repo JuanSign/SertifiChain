@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "src/sertifichain_backend"
+]
+resolver = "2"

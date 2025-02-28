@@ -1,0 +1,27 @@
+{
+  "canisters": {
+    "sertifichain_backend": {
+      "candid": "src/sertifichain_backend/sertifichain_backend.did",
+      "package": "sertifichain_backend",
+      "type": "rust"
+    },
+    "sertifichain_frontend": {
+      "dependencies": [
+        "sertifichain_backend"
+      ],
+      "source": [
+        "src/sertifichain_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "sertifichain_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
