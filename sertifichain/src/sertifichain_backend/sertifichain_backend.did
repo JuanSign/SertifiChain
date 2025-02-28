@@ -1,3 +1,10 @@
 service : {
-    "greet": (text) -> (text) query;
+  issue_certificate : (nat64, text, text, float64, text) -> (text);
+  transfer_ownership : (nat64, text) -> (text);
+  get_certificate : (nat64) -> (opt record {
+    owner : text;
+    location : text;
+    size : float64;
+    issued_by : text;
+  });
 }
