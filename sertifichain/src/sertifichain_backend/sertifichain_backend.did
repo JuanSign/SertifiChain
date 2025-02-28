@@ -1,6 +1,6 @@
 service : {
   issue_certificate : (nat64, text, text, float64, text) -> (text);
-  transfer_ownership : (nat64, text) -> (text);
+  transfer_ownership : (nat64, text) -> (bool, text);
   get_certificate : (nat64) -> (opt record {
     owner : text;
     location : text;
