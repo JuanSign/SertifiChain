@@ -1,30 +1,38 @@
 {
-  "name": "sertifichain_frontend",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "setup": "npm i && dfx canister create sertifichain_backend && dfx generate sertifichain_backend && dfx deploy",
-    "start": "vite --port 3000",
-    "prebuild": "dfx generate",
-    "build": "tsc && vite build",
-    "format": "prettier --write \"src/**/*.{json,js,jsx,ts,tsx,css,scss}\""
-  },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@dfinity/agent": "^2.1.3",
-    "@dfinity/candid": "^2.1.3",
-    "@dfinity/principal": "^2.1.3"
-  },
-  "devDependencies": {
-    "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.6",
-    "@vitejs/plugin-react": "^4.0.1",
-    "dotenv": "^16.3.1",
-    "sass": "^1.63.6",
-    "typescript": "^5.1.3",
-    "vite": "^4.3.9",
-    "vite-plugin-environment": "^1.1.3"
-  }
+    "name": "sertifichain_frontend",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "setup": "npm i && dfx canister create sertifichain_backend && dfx generate sertifichain_backend && dfx deploy",
+        "start": "vite --port 3000",
+        "prebuild": "dfx generate",
+        "build": "npm run generate-routes && tsc && vite build",
+        "format": "prettier --write \"src/**/*.{json,js,jsx,ts,tsx,css,scss}\"",
+        "generate-routes": "tsr generate",
+        "watch-routes": "tsr watch"
+    },
+    "dependencies": {
+        "@dfinity/agent": "^2.3.0",
+        "@dfinity/candid": "^2.3.0",
+        "@dfinity/principal": "^2.3.0",
+        "@tailwindcss/vite": "^4.0.9",
+        "@tanstack/react-router": "^1.112.7",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "tailwindcss": "^4.0.9"
+    },
+    "devDependencies": {
+        "@tanstack/router-cli": "^1.112.7",
+        "@tanstack/router-devtools": "^1.112.7",
+        "@tanstack/router-plugin": "^1.112.7",
+        "@types/react": "^19.0.10",
+        "@types/react-dom": "^19.0.4",
+        "@vitejs/plugin-react": "^4.3.4",
+        "dotenv": "^16.4.7",
+        "sass": "^1.85.1",
+        "typescript": "^5.8.2",
+        "vite": "^6.2.0",
+        "vite-plugin-environment": "^1.1.3"
+    }
 }
