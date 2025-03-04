@@ -1,5 +1,34 @@
 @import "tailwindcss";
+@config "../tailwind.config.ts";
 
 .browser-warning{
     display: none;
+}
+
+@layer base {
+    :root {
+        --primary: #2563eb;
+        --primary-light: #3b82f6;
+        --primary-dark: #1e40af;
+        --primary-foreground: #ffffff;
+      
+        --secondary: #9333ea;
+        --secondary-light: #a855f7;
+        --secondary-dark: #7e22ce;
+        --secondary-foreground: #ffffff;
+      
+        --background: #f8fafc;
+        --foreground: #1e293b;
+        --card: #ffffff;
+        --accent: #eab308;
+        --muted: #94a3b8;
+      }
+      
+
+    html.dark {
+        /* jika kita pengen ada dark mode */
+        /* --background: black; */
+        /* ... */
+        /* dll */
+    }
 }
