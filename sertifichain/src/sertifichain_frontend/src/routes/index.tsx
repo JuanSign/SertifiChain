@@ -6,13 +6,13 @@ export const Route = createFileRoute('/')({
 
 function RouteComponent() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0F172A] to-[#0A0F1E] text-white font-poppins">
+    <div className="min-h-screen text-white font-poppins">
       
       {/* Hero Section */}
       <section className="flex flex-col items-center text-center px-6 py-20">
         <h1 className="text-5xl font-bold leading-tight">
           Lorem ipsum dolor sit amet <br />
-          <span className="text-blue-500">Sertifichain</span>
+          <span className="text-blue-500">SertifiChain</span>
         </h1>
         <p className="text-gray-300 mt-4 max-w-2xl">
           Lorem ipsum dolor sit amet consectetur. Faucibus arcu hendrerit massa in. 
