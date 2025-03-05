@@ -3,12 +3,12 @@ import Navbar from "./navbar";
 import Sidebar from "./sidebar";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  const { loggedIn, setLoggedIn } = useGlobalContext();
+  const { showNavBar, setShowNavBar } = useGlobalContext();
 
   return (
     <div className="min-h-screen min-w-screen bg-gradient-to-b from-[#0F172A] to-[#0A0F1E]">
-      <div className={`flex ${loggedIn ? "flex-row" : "flex-col"}`}>
-        {loggedIn ? <Sidebar /> : <Navbar />}
+      <div className={`flex ${showNavBar ? "flex-col" : "flex-row"}`}>
+        {showNavBar ? <Navbar /> : <Sidebar />}
         <main className="flex-1">{children}</main>
       </div>
     </div>

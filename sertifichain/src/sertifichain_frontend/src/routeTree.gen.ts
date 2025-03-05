@@ -11,41 +11,55 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as Feature3Import } from './routes/feature3'
-import { Route as Feature2Import } from './routes/feature2'
-import { Route as FeatureImport } from './routes/feature'
-import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
+import { Route as HomeIndexImport } from './routes/home/index'
+import { Route as HomeFeature3Import } from './routes/home/feature3'
+import { Route as HomeFeature2Import } from './routes/home/feature2'
+import { Route as HomeFeatureImport } from './routes/home/feature'
+import { Route as HomeAboutImport } from './routes/home/about'
+import { Route as DashboardPindahtanganImport } from './routes/dashboard/pindah_tangan'
 
 // Create/Update Routes
-
-const Feature3Route = Feature3Import.update({
-  id: '/feature3',
-  path: '/feature3',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const Feature2Route = Feature2Import.update({
-  id: '/feature2',
-  path: '/feature2',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const FeatureRoute = FeatureImport.update({
-  id: '/feature',
-  path: '/feature',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AboutRoute = AboutImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const HomeIndexRoute = HomeIndexImport.update({
+  id: '/home/',
+  path: '/home/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const HomeFeature3Route = HomeFeature3Import.update({
+  id: '/home/feature3',
+  path: '/home/feature3',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const HomeFeature2Route = HomeFeature2Import.update({
+  id: '/home/feature2',
+  path: '/home/feature2',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const HomeFeatureRoute = HomeFeatureImport.update({
+  id: '/home/feature',
+  path: '/home/feature',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const HomeAboutRoute = HomeAboutImport.update({
+  id: '/home/about',
+  path: '/home/about',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardPindahtanganRoute = DashboardPindahtanganImport.update({
+  id: '/dashboard/pindah_tangan',
+  path: '/dashboard/pindah_tangan',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -60,32 +74,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
+    '/dashboard/pindah_tangan': {
+      id: '/dashboard/pindah_tangan'
+      path: '/dashboard/pindah_tangan'
+      fullPath: '/dashboard/pindah_tangan'
+      preLoaderRoute: typeof DashboardPindahtanganImport
       parentRoute: typeof rootRoute
     }
-    '/feature': {
-      id: '/feature'
-      path: '/feature'
-      fullPath: '/feature'
-      preLoaderRoute: typeof FeatureImport
+    '/home/about': {
+      id: '/home/about'
+      path: '/home/about'
+      fullPath: '/home/about'
+      preLoaderRoute: typeof HomeAboutImport
       parentRoute: typeof rootRoute
     }
-    '/feature2': {
-      id: '/feature2'
-      path: '/feature2'
-      fullPath: '/feature2'
-      preLoaderRoute: typeof Feature2Import
+    '/home/feature': {
+      id: '/home/feature'
+      path: '/home/feature'
+      fullPath: '/home/feature'
+      preLoaderRoute: typeof HomeFeatureImport
       parentRoute: typeof rootRoute
     }
-    '/feature3': {
-      id: '/feature3'
-      path: '/feature3'
-      fullPath: '/feature3'
-      preLoaderRoute: typeof Feature3Import
+    '/home/feature2': {
+      id: '/home/feature2'
+      path: '/home/feature2'
+      fullPath: '/home/feature2'
+      preLoaderRoute: typeof HomeFeature2Import
+      parentRoute: typeof rootRoute
+    }
+    '/home/feature3': {
+      id: '/home/feature3'
+      path: '/home/feature3'
+      fullPath: '/home/feature3'
+      preLoaderRoute: typeof HomeFeature3Import
+      parentRoute: typeof rootRoute
+    }
+    '/home/': {
+      id: '/home/'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -95,52 +123,84 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/feature': typeof FeatureRoute
-  '/feature2': typeof Feature2Route
-  '/feature3': typeof Feature3Route
+  '/dashboard/pindah_tangan': typeof DashboardPindahtanganRoute
+  '/home/about': typeof HomeAboutRoute
+  '/home/feature': typeof HomeFeatureRoute
+  '/home/feature2': typeof HomeFeature2Route
+  '/home/feature3': typeof HomeFeature3Route
+  '/home': typeof HomeIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/feature': typeof FeatureRoute
-  '/feature2': typeof Feature2Route
-  '/feature3': typeof Feature3Route
+  '/dashboard/pindah_tangan': typeof DashboardPindahtanganRoute
+  '/home/about': typeof HomeAboutRoute
+  '/home/feature': typeof HomeFeatureRoute
+  '/home/feature2': typeof HomeFeature2Route
+  '/home/feature3': typeof HomeFeature3Route
+  '/home': typeof HomeIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/feature': typeof FeatureRoute
-  '/feature2': typeof Feature2Route
-  '/feature3': typeof Feature3Route
+  '/dashboard/pindah_tangan': typeof DashboardPindahtanganRoute
+  '/home/about': typeof HomeAboutRoute
+  '/home/feature': typeof HomeFeatureRoute
+  '/home/feature2': typeof HomeFeature2Route
+  '/home/feature3': typeof HomeFeature3Route
+  '/home/': typeof HomeIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/feature' | '/feature2' | '/feature3'
+  fullPaths:
+    | '/'
+    | '/dashboard/pindah_tangan'
+    | '/home/about'
+    | '/home/feature'
+    | '/home/feature2'
+    | '/home/feature3'
+    | '/home'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/feature' | '/feature2' | '/feature3'
-  id: '__root__' | '/' | '/about' | '/feature' | '/feature2' | '/feature3'
+  to:
+    | '/'
+    | '/dashboard/pindah_tangan'
+    | '/home/about'
+    | '/home/feature'
+    | '/home/feature2'
+    | '/home/feature3'
+    | '/home'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard/pindah_tangan'
+    | '/home/about'
+    | '/home/feature'
+    | '/home/feature2'
+    | '/home/feature3'
+    | '/home/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
-  FeatureRoute: typeof FeatureRoute
-  Feature2Route: typeof Feature2Route
-  Feature3Route: typeof Feature3Route
+  DashboardPindahtanganRoute: typeof DashboardPindahtanganRoute
+  HomeAboutRoute: typeof HomeAboutRoute
+  HomeFeatureRoute: typeof HomeFeatureRoute
+  HomeFeature2Route: typeof HomeFeature2Route
+  HomeFeature3Route: typeof HomeFeature3Route
+  HomeIndexRoute: typeof HomeIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
-  FeatureRoute: FeatureRoute,
-  Feature2Route: Feature2Route,
-  Feature3Route: Feature3Route,
+  DashboardPindahtanganRoute: DashboardPindahtanganRoute,
+  HomeAboutRoute: HomeAboutRoute,
+  HomeFeatureRoute: HomeFeatureRoute,
+  HomeFeature2Route: HomeFeature2Route,
+  HomeFeature3Route: HomeFeature3Route,
+  HomeIndexRoute: HomeIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -154,26 +214,34 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about",
-        "/feature",
-        "/feature2",
-        "/feature3"
+        "/dashboard/pindah_tangan",
+        "/home/about",
+        "/home/feature",
+        "/home/feature2",
+        "/home/feature3",
+        "/home/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/about": {
-      "filePath": "about.tsx"
+    "/dashboard/pindah_tangan": {
+      "filePath": "dashboard/pindah_tangan.tsx"
     },
-    "/feature": {
-      "filePath": "feature.tsx"
+    "/home/about": {
+      "filePath": "home/about.tsx"
     },
-    "/feature2": {
-      "filePath": "feature2.tsx"
+    "/home/feature": {
+      "filePath": "home/feature.tsx"
     },
-    "/feature3": {
-      "filePath": "feature3.tsx"
+    "/home/feature2": {
+      "filePath": "home/feature2.tsx"
+    },
+    "/home/feature3": {
+      "filePath": "home/feature3.tsx"
+    },
+    "/home/": {
+      "filePath": "home/index.tsx"
     }
   }
 }

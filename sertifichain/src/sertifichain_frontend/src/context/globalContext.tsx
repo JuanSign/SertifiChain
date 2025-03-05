@@ -1,17 +1,17 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
 type GlobalContextType = {
-  loggedIn: boolean;
-  setLoggedIn: (state: boolean) => void;
+  showNavBar: boolean;
+  setShowNavBar: (state: boolean) => void;
 };
 
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
 
 export const GlobalProvider = ({ children }: { children: ReactNode }) => {
-  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [showNavBar, setShowNavBar] = useState<boolean>(true);
 
   return (
-    <GlobalContext.Provider value={{ loggedIn, setLoggedIn }}>
+    <GlobalContext.Provider value={{ showNavBar, setShowNavBar }}>
       {children}
     </GlobalContext.Provider>
   );
