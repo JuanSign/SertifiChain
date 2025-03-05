@@ -1,12 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { useGlobalContext } from "../context/globalContext";
 
 const NavBar = () => {
-    const { showNavBar, setShowNavBar } = useGlobalContext();
-
-    const onClickProfile = () => {
-        setShowNavBar(false);
-    }
 
     return (
         <nav className="p-4 flex justify-between items-center text-white">
@@ -22,7 +16,7 @@ const NavBar = () => {
                 <button>
                     <img src="/notification.png" alt="Notification" className="w-6 h-6" />
                 </button>
-                <button onClick={onClickProfile}>
+                <button >
                     <img src="/account.png" alt="Account" className="w-6 h-6" />
                 </button>
             </div>

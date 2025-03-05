@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { useGlobalContext } from "../context/globalContext";
 
 const Sidebar = () => {
     const [ active, setActive ] = useState("Home");
-    const { showNavBar, setShowNavBar } = useGlobalContext();
 
     const navItems = [
         { name: "Daftar Kepemilikan", icon: "/icons/home.png" },
@@ -11,15 +9,10 @@ const Sidebar = () => {
         { name: "Aktivitas", icon: "/icons/settings.png" }
     ];
 
-    const onClickBack = () => {
-        console.log("clicked");
-        setShowNavBar(true);
-    }
-
     return (
         <nav className="flex flex-col bg-gradient-to-b from-[#050C1B] to-[#183981] mx-8 my-8 rounded-xl shadow-md shadow-gray-300">
             <div className="h-full w-full bg-[url('/background/sidebar.png')] bg-cover bg-center pt-6 px-8 rounded-t-xl flex flex-col justify-between">
-                <button className="flex items-start space-x-2" onClick={onClickBack}>
+                <button className="flex items-start space-x-2" >
                     <img src="/components/back_arrow.png" />
                     <span className="text-2xl font-bold leading-tight text-white mt-0.5 text-shadow-lg">SertifiChain</span>
                 </button>

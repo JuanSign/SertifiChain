@@ -1,14 +1,14 @@
-import { useGlobalContext } from "../context/globalContext";
+import { useRouteContext } from "../context/globalContext";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  const { showNavBar, setShowNavBar } = useGlobalContext();
-
+  const { isHome } = useRouteContext();
+  console.log(isHome);
   return (
     <div className="min-h-screen min-w-screen bg-gradient-to-b from-[#0F172A] to-[#0A0F1E]">
-      <div className={`flex ${showNavBar ? "flex-col" : "flex-row"}`}>
-        {showNavBar ? <Navbar /> : <Sidebar />}
+      <div className={`flex ${isHome ? "flex-col" : "flex-row"}`}>
+        {isHome ? <Navbar /> : <Sidebar />}
         <main className="flex-1">{children}</main>
       </div>
     </div>

@@ -1,24 +1,20 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { useRouterState } from "@tanstack/react-router";
 
-type GlobalContextType = {
-  showNavBar: boolean;
-  setShowNavBar: (state: boolean) => void;
+const RouteContext = createContext({ isHome: false });
+
+export const RouteProvider = ({ children }: { children: ReactNode }) => {
+  const routerState = useRouterState(); // Get the router state
+  const currentRoute = routerState?.location.pathname ?? ""; // Ensure no crash
+  const [isHome, setIsHome] = useState(currentRoute.startsWith("/home"));
+
+  useEffect(() => {
+    if (routerState) {
+      setIsHome(currentRoute.startsWith("/home"));
+    }
+  }, [routerState, currentRoute]);
+
+  return <RouteContext.Provider value={{ isHome }}>{children}</RouteContext.Provider>;
 };
 
-const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
-
-export const GlobalProvider = ({ children }: { children: ReactNode }) => {
-  const [showNavBar, setShowNavBar] = useState<boolean>(true);
-
-  return (
-    <GlobalContext.Provider value={{ showNavBar, setShowNavBar }}>
-      {children}
-    </GlobalContext.Provider>
-  );
-};
-
-export const useGlobalContext = () => {
-  const context = useContext(GlobalContext);
-  if (!context) throw new Error("useGlobalContext must be used within GlobalProvider");
-  return context;
-};
+export const useRouteContext = () => useContext(RouteContext);
