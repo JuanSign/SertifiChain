@@ -11,10 +11,31 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as Feature3Import } from './routes/feature3'
+import { Route as Feature2Import } from './routes/feature2'
+import { Route as FeatureImport } from './routes/feature'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const Feature3Route = Feature3Import.update({
+  id: '/feature3',
+  path: '/feature3',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const Feature2Route = Feature2Import.update({
+  id: '/feature2',
+  path: '/feature2',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FeatureRoute = FeatureImport.update({
+  id: '/feature',
+  path: '/feature',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AboutRoute = AboutImport.update({
   id: '/about',
@@ -46,6 +67,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/feature': {
+      id: '/feature'
+      path: '/feature'
+      fullPath: '/feature'
+      preLoaderRoute: typeof FeatureImport
+      parentRoute: typeof rootRoute
+    }
+    '/feature2': {
+      id: '/feature2'
+      path: '/feature2'
+      fullPath: '/feature2'
+      preLoaderRoute: typeof Feature2Import
+      parentRoute: typeof rootRoute
+    }
+    '/feature3': {
+      id: '/feature3'
+      path: '/feature3'
+      fullPath: '/feature3'
+      preLoaderRoute: typeof Feature3Import
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -54,36 +96,51 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/feature': typeof FeatureRoute
+  '/feature2': typeof Feature2Route
+  '/feature3': typeof Feature3Route
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/feature': typeof FeatureRoute
+  '/feature2': typeof Feature2Route
+  '/feature3': typeof Feature3Route
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/feature': typeof FeatureRoute
+  '/feature2': typeof Feature2Route
+  '/feature3': typeof Feature3Route
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths: '/' | '/about' | '/feature' | '/feature2' | '/feature3'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to: '/' | '/about' | '/feature' | '/feature2' | '/feature3'
+  id: '__root__' | '/' | '/about' | '/feature' | '/feature2' | '/feature3'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  FeatureRoute: typeof FeatureRoute
+  Feature2Route: typeof Feature2Route
+  Feature3Route: typeof Feature3Route
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  FeatureRoute: FeatureRoute,
+  Feature2Route: Feature2Route,
+  Feature3Route: Feature3Route,
 }
 
 export const routeTree = rootRoute
@@ -97,7 +154,10 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about"
+        "/about",
+        "/feature",
+        "/feature2",
+        "/feature3"
       ]
     },
     "/": {
@@ -105,6 +165,15 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/feature": {
+      "filePath": "feature.tsx"
+    },
+    "/feature2": {
+      "filePath": "feature2.tsx"
+    },
+    "/feature3": {
+      "filePath": "feature3.tsx"
     }
   }
 }
