@@ -33,6 +33,7 @@ const config: Config = {
         sans: ["Inter", "sans-serif"],
         serif: ["Merriweather", "serif"],
         mono: ["Fira Code", "monospace"],
+        poppins: ["Poppins", "sans-serif"],
       },
       spacing: {
         xs: "4px",

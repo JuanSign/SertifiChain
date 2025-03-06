@@ -10,7 +10,7 @@ function LandingPage() {
       
       <section className="flex flex-col items-center text-center px-6 py-20">
         <h1 className="text-5xl font-bold leading-tight">
-          Lorem ipsum dolor sit amet <br />
+          Lorem ipsum dolor sit amet awa<br />
           <span className="text-blue-500">Sertifichain</span>
         </h1>
         <p className="text-gray-300 mt-4 max-w-2xl">
