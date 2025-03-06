@@ -39,10 +39,9 @@ function LandingPage() {
                    transition-all duration-300 ease-in-out overflow-hidden 
                    before:absolute before:inset-0 before:bg-gradient-to-b before:from-[#242447] before:via-[#222532] before:to-[#080C29] 
                    before:scale-0 before:transition-transform before:duration-300 before:ease-in-out 
-                   hover:text-white hover:shadow-lg hover:shadow-white/20 hover:before:scale-100">
-          Let’s Get Started
+                   hover:before:scale-100 hover:shadow-[0px_0px_25px_4px_rgba(171,123,255,0.4)] hover:scale-105">
+          <span className="relative z-10">Let’s Get Started</span>
         </button>
-
       </section>
 
       {/* Enhancing Transaction Transparency */}
