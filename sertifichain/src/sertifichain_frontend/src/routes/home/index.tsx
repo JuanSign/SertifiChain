@@ -24,7 +24,7 @@ function LandingPage() {
        * The hero section includes a heading, paragraph, and a call-to-action button
        * to encourage users to sign up for the service.
        */}
-      <section className="flex flex-col items-center text-center px-6 py-40">
+      <section className="flex flex-col items-center text-center px-6 py-40" id="about">
         <h1 className="text-[64px] font-bold leading-tight">
           Lorem ipsum dolor sit amet <br />
           <span className="bg-gradient-to-r from-[#3355FF] to-[#69CFB5] bg-clip-text text-transparent">
@@ -49,7 +49,7 @@ function LandingPage() {
        * This section showcases how blockchain technology can be used to enhance
        * transaction transparency.
        */}
-      <section className="text-center py-25">
+      <section className="text-center py-25" id="tech">
         <h2 className="text-[40px] font-bold">
           Enhancing Transaction Transparency <br />
           <span className="text-[40px] font-bold">with Blockchain Technology</span>
@@ -118,7 +118,7 @@ function LandingPage() {
       {/* 
        * This section showcases what can be done with the application.
        */}
-      <section className="py-16">
+      <section className="py-16" id="feature">
         <h2 className="text-[40px] font-bold text-center">What Can We Do?</h2>
         <div className="flex flex-col items-center gap-8 mt-10">
 
@@ -178,7 +178,7 @@ function LandingPage() {
       {/* 
        * This section showcases frequently asked questions.
        */}
-      <section className="py-16">
+      <section className="py-16" id="FAQ">
         <h2 className="text-[40px] font-bold text-center text-white">Frequently Asked Questions</h2>
         <div className="mt-10 max-w-5xl mx-auto space-y-4">
           {[

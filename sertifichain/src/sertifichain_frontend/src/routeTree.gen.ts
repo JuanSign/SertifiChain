@@ -14,9 +14,6 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as HomeIndexImport } from './routes/home/index'
 import { Route as DashboardIndexImport } from './routes/dashboard/index'
-import { Route as HomeFeature3Import } from './routes/home/feature3'
-import { Route as HomeFeature2Import } from './routes/home/feature2'
-import { Route as HomeFeatureImport } from './routes/home/feature'
 import { Route as HomeAboutImport } from './routes/home/about'
 import { Route as DashboardPindahtanganImport } from './routes/dashboard/pindah_tangan'
 import { Route as DashboardAktivitasImport } from './routes/dashboard/aktivitas'
@@ -39,24 +36,6 @@ const HomeIndexRoute = HomeIndexImport.update({
 const DashboardIndexRoute = DashboardIndexImport.update({
   id: '/dashboard/',
   path: '/dashboard/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const HomeFeature3Route = HomeFeature3Import.update({
-  id: '/home/feature3',
-  path: '/home/feature3',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const HomeFeature2Route = HomeFeature2Import.update({
-  id: '/home/feature2',
-  path: '/home/feature2',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const HomeFeatureRoute = HomeFeatureImport.update({
-  id: '/home/feature',
-  path: '/home/feature',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -123,27 +102,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeAboutImport
       parentRoute: typeof rootRoute
     }
-    '/home/feature': {
-      id: '/home/feature'
-      path: '/home/feature'
-      fullPath: '/home/feature'
-      preLoaderRoute: typeof HomeFeatureImport
-      parentRoute: typeof rootRoute
-    }
-    '/home/feature2': {
-      id: '/home/feature2'
-      path: '/home/feature2'
-      fullPath: '/home/feature2'
-      preLoaderRoute: typeof HomeFeature2Import
-      parentRoute: typeof rootRoute
-    }
-    '/home/feature3': {
-      id: '/home/feature3'
-      path: '/home/feature3'
-      fullPath: '/home/feature3'
-      preLoaderRoute: typeof HomeFeature3Import
-      parentRoute: typeof rootRoute
-    }
     '/dashboard/': {
       id: '/dashboard/'
       path: '/dashboard'
@@ -169,9 +127,6 @@ export interface FileRoutesByFullPath {
   '/dashboard/aktivitas': typeof DashboardAktivitasRoute
   '/dashboard/pindah_tangan': typeof DashboardPindahtanganRoute
   '/home/about': typeof HomeAboutRoute
-  '/home/feature': typeof HomeFeatureRoute
-  '/home/feature2': typeof HomeFeature2Route
-  '/home/feature3': typeof HomeFeature3Route
   '/dashboard': typeof DashboardIndexRoute
   '/home': typeof HomeIndexRoute
 }
@@ -182,9 +137,6 @@ export interface FileRoutesByTo {
   '/dashboard/aktivitas': typeof DashboardAktivitasRoute
   '/dashboard/pindah_tangan': typeof DashboardPindahtanganRoute
   '/home/about': typeof HomeAboutRoute
-  '/home/feature': typeof HomeFeatureRoute
-  '/home/feature2': typeof HomeFeature2Route
-  '/home/feature3': typeof HomeFeature3Route
   '/dashboard': typeof DashboardIndexRoute
   '/home': typeof HomeIndexRoute
 }
@@ -196,9 +148,6 @@ export interface FileRoutesById {
   '/dashboard/aktivitas': typeof DashboardAktivitasRoute
   '/dashboard/pindah_tangan': typeof DashboardPindahtanganRoute
   '/home/about': typeof HomeAboutRoute
-  '/home/feature': typeof HomeFeatureRoute
-  '/home/feature2': typeof HomeFeature2Route
-  '/home/feature3': typeof HomeFeature3Route
   '/dashboard/': typeof DashboardIndexRoute
   '/home/': typeof HomeIndexRoute
 }
@@ -211,9 +160,6 @@ export interface FileRouteTypes {
     | '/dashboard/aktivitas'
     | '/dashboard/pindah_tangan'
     | '/home/about'
-    | '/home/feature'
-    | '/home/feature2'
-    | '/home/feature3'
     | '/dashboard'
     | '/home'
   fileRoutesByTo: FileRoutesByTo
@@ -223,9 +169,6 @@ export interface FileRouteTypes {
     | '/dashboard/aktivitas'
     | '/dashboard/pindah_tangan'
     | '/home/about'
-    | '/home/feature'
-    | '/home/feature2'
-    | '/home/feature3'
     | '/dashboard'
     | '/home'
   id:
@@ -235,9 +178,6 @@ export interface FileRouteTypes {
     | '/dashboard/aktivitas'
     | '/dashboard/pindah_tangan'
     | '/home/about'
-    | '/home/feature'
-    | '/home/feature2'
-    | '/home/feature3'
     | '/dashboard/'
     | '/home/'
   fileRoutesById: FileRoutesById
@@ -249,9 +189,6 @@ export interface RootRouteChildren {
   DashboardAktivitasRoute: typeof DashboardAktivitasRoute
   DashboardPindahtanganRoute: typeof DashboardPindahtanganRoute
   HomeAboutRoute: typeof HomeAboutRoute
-  HomeFeatureRoute: typeof HomeFeatureRoute
-  HomeFeature2Route: typeof HomeFeature2Route
-  HomeFeature3Route: typeof HomeFeature3Route
   DashboardIndexRoute: typeof DashboardIndexRoute
   HomeIndexRoute: typeof HomeIndexRoute
 }
@@ -262,9 +199,6 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardAktivitasRoute: DashboardAktivitasRoute,
   DashboardPindahtanganRoute: DashboardPindahtanganRoute,
   HomeAboutRoute: HomeAboutRoute,
-  HomeFeatureRoute: HomeFeatureRoute,
-  HomeFeature2Route: HomeFeature2Route,
-  HomeFeature3Route: HomeFeature3Route,
   DashboardIndexRoute: DashboardIndexRoute,
   HomeIndexRoute: HomeIndexRoute,
 }
@@ -284,9 +218,6 @@ export const routeTree = rootRoute
         "/dashboard/aktivitas",
         "/dashboard/pindah_tangan",
         "/home/about",
-        "/home/feature",
-        "/home/feature2",
-        "/home/feature3",
         "/dashboard/",
         "/home/"
       ]
@@ -305,15 +236,6 @@ export const routeTree = rootRoute
     },
     "/home/about": {
       "filePath": "home/about.tsx"
-    },
-    "/home/feature": {
-      "filePath": "home/feature.tsx"
-    },
-    "/home/feature2": {
-      "filePath": "home/feature2.tsx"
-    },
-    "/home/feature3": {
-      "filePath": "home/feature3.tsx"
     },
     "/dashboard/": {
       "filePath": "dashboard/index.tsx"
