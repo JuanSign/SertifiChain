@@ -18,6 +18,9 @@ import { Route as HomeFeature3Import } from './routes/home/feature3'
 import { Route as HomeFeature2Import } from './routes/home/feature2'
 import { Route as HomeFeatureImport } from './routes/home/feature'
 import { Route as HomeAboutImport } from './routes/home/about'
+import { Route as DashboardPindahtanganImport } from './routes/dashboard/pindah_tangan'
+import { Route as DashboardAktivitasImport } from './routes/dashboard/aktivitas'
+import { Route as DashboardNibImport } from './routes/dashboard/$nib'
 
 // Create/Update Routes
 
@@ -63,6 +66,24 @@ const HomeAboutRoute = HomeAboutImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const DashboardPindahtanganRoute = DashboardPindahtanganImport.update({
+  id: '/dashboard/pindah_tangan',
+  path: '/dashboard/pindah_tangan',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardAktivitasRoute = DashboardAktivitasImport.update({
+  id: '/dashboard/aktivitas',
+  path: '/dashboard/aktivitas',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardNibRoute = DashboardNibImport.update({
+  id: '/dashboard/$nib',
+  path: '/dashboard/$nib',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -72,6 +93,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/$nib': {
+      id: '/dashboard/$nib'
+      path: '/dashboard/$nib'
+      fullPath: '/dashboard/$nib'
+      preLoaderRoute: typeof DashboardNibImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/aktivitas': {
+      id: '/dashboard/aktivitas'
+      path: '/dashboard/aktivitas'
+      fullPath: '/dashboard/aktivitas'
+      preLoaderRoute: typeof DashboardAktivitasImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/pindah_tangan': {
+      id: '/dashboard/pindah_tangan'
+      path: '/dashboard/pindah_tangan'
+      fullPath: '/dashboard/pindah_tangan'
+      preLoaderRoute: typeof DashboardPindahtanganImport
       parentRoute: typeof rootRoute
     }
     '/home/about': {
@@ -123,6 +165,9 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard/$nib': typeof DashboardNibRoute
+  '/dashboard/aktivitas': typeof DashboardAktivitasRoute
+  '/dashboard/pindah_tangan': typeof DashboardPindahtanganRoute
   '/home/about': typeof HomeAboutRoute
   '/home/feature': typeof HomeFeatureRoute
   '/home/feature2': typeof HomeFeature2Route
@@ -133,6 +178,9 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard/$nib': typeof DashboardNibRoute
+  '/dashboard/aktivitas': typeof DashboardAktivitasRoute
+  '/dashboard/pindah_tangan': typeof DashboardPindahtanganRoute
   '/home/about': typeof HomeAboutRoute
   '/home/feature': typeof HomeFeatureRoute
   '/home/feature2': typeof HomeFeature2Route
@@ -144,6 +192,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/dashboard/$nib': typeof DashboardNibRoute
+  '/dashboard/aktivitas': typeof DashboardAktivitasRoute
+  '/dashboard/pindah_tangan': typeof DashboardPindahtanganRoute
   '/home/about': typeof HomeAboutRoute
   '/home/feature': typeof HomeFeatureRoute
   '/home/feature2': typeof HomeFeature2Route
@@ -156,6 +207,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/dashboard/$nib'
+    | '/dashboard/aktivitas'
+    | '/dashboard/pindah_tangan'
     | '/home/about'
     | '/home/feature'
     | '/home/feature2'
@@ -165,6 +219,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/dashboard/$nib'
+    | '/dashboard/aktivitas'
+    | '/dashboard/pindah_tangan'
     | '/home/about'
     | '/home/feature'
     | '/home/feature2'
@@ -174,6 +231,9 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/dashboard/$nib'
+    | '/dashboard/aktivitas'
+    | '/dashboard/pindah_tangan'
     | '/home/about'
     | '/home/feature'
     | '/home/feature2'
@@ -185,6 +245,9 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardNibRoute: typeof DashboardNibRoute
+  DashboardAktivitasRoute: typeof DashboardAktivitasRoute
+  DashboardPindahtanganRoute: typeof DashboardPindahtanganRoute
   HomeAboutRoute: typeof HomeAboutRoute
   HomeFeatureRoute: typeof HomeFeatureRoute
   HomeFeature2Route: typeof HomeFeature2Route
@@ -195,6 +258,9 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardNibRoute: DashboardNibRoute,
+  DashboardAktivitasRoute: DashboardAktivitasRoute,
+  DashboardPindahtanganRoute: DashboardPindahtanganRoute,
   HomeAboutRoute: HomeAboutRoute,
   HomeFeatureRoute: HomeFeatureRoute,
   HomeFeature2Route: HomeFeature2Route,
@@ -214,6 +280,9 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/dashboard/$nib",
+        "/dashboard/aktivitas",
+        "/dashboard/pindah_tangan",
         "/home/about",
         "/home/feature",
         "/home/feature2",
@@ -224,6 +293,15 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/dashboard/$nib": {
+      "filePath": "dashboard/$nib.tsx"
+    },
+    "/dashboard/aktivitas": {
+      "filePath": "dashboard/aktivitas.tsx"
+    },
+    "/dashboard/pindah_tangan": {
+      "filePath": "dashboard/pindah_tangan.tsx"
     },
     "/home/about": {
       "filePath": "home/about.tsx"

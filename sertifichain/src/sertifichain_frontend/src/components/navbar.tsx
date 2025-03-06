@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
 const NavBar = () => {
-
     return (
         <nav className="p-4 flex justify-between items-center text-white">
             <Link to="/home">
@@ -16,9 +15,9 @@ const NavBar = () => {
                 <button>
                     <img src="/notification.png" alt="Notification" className="w-6 h-6" />
                 </button>
-                <button >
+                <Link to="/dashboard">
                     <img src="/account.png" alt="Account" className="w-6 h-6" />
-                </button>
+                </Link>
             </div>
         </nav>
     );
