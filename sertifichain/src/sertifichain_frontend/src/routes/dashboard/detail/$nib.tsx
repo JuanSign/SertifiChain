@@ -11,8 +11,6 @@ function RouteComponent() {
     const [ showDetail, setShowDetail ] = useState<boolean>(true);
     const { nib } = useParams({ strict: false })
 
-    
-
     return (
         <div className='pt-12'>
             <Link className="flex items-center space-x-2" to="/dashboard">

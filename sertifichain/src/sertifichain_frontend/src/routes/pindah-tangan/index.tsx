@@ -3,6 +3,8 @@ import PindahTanganHeader from '../../components/pindah_tangan_header';
 import { useState } from 'react';
 import Sertifikat from '../../components/sertif';
 import Step1 from '../../components/pindah-tangan/step1';
+import Step2 from '../../components/pindah-tangan/step2';
+import Step3 from '../../components/pindah-tangan/step3';
 
 export const Route = createFileRoute('/pindah-tangan/')({
   component: RouteComponent,
@@ -27,10 +29,10 @@ function RouteComponent() {
       </Link>
 
       <PindahTanganHeader state={step} />
-      <div className='px-20'>
+      <div className='px-20 flex flex-col items-center'>
         { step === 1 ? <Step1 next={nextStep}/> : null }
-        { step === 2 ? <div>Step 2</div> : null }
-        { step === 3 ? <div>Step 3</div> : null }
+        { step === 2 ? <Step2 next={nextStep} prev={prevStep}/> : null }
+        { step === 3 ? <Step3 prev={prevStep}/> : null }
       </div>
      
     </div>
