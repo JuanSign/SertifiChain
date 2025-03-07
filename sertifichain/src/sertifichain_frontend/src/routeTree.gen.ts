@@ -14,13 +14,12 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as HomeIndexImport } from './routes/home/index'
 import { Route as DashboardIndexImport } from './routes/dashboard/index'
-import { Route as HomeFeature3Import } from './routes/home/feature3'
 import { Route as HomeCeksertifImport } from './routes/home/ceksertif'
 import { Route as HomeAutentikasiImport } from './routes/home/autentikasi'
 import { Route as HomeAboutImport } from './routes/home/about'
 import { Route as DashboardPindahtanganImport } from './routes/dashboard/pindah_tangan'
 import { Route as DashboardAktivitasImport } from './routes/dashboard/aktivitas'
-import { Route as DashboardNibImport } from './routes/dashboard/$nib'
+import { Route as DashboardDetailNibImport } from './routes/dashboard/detail/$nib'
 
 // Create/Update Routes
 
@@ -39,12 +38,6 @@ const HomeIndexRoute = HomeIndexImport.update({
 const DashboardIndexRoute = DashboardIndexImport.update({
   id: '/dashboard/',
   path: '/dashboard/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const HomeFeature3Route = HomeFeature3Import.update({
-  id: '/home/feature3',
-  path: '/home/feature3',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -78,9 +71,9 @@ const DashboardAktivitasRoute = DashboardAktivitasImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const DashboardNibRoute = DashboardNibImport.update({
-  id: '/dashboard/$nib',
-  path: '/dashboard/$nib',
+const DashboardDetailNibRoute = DashboardDetailNibImport.update({
+  id: '/dashboard/detail/$nib',
+  path: '/dashboard/detail/$nib',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -93,13 +86,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/$nib': {
-      id: '/dashboard/$nib'
-      path: '/dashboard/$nib'
-      fullPath: '/dashboard/$nib'
-      preLoaderRoute: typeof DashboardNibImport
       parentRoute: typeof rootRoute
     }
     '/dashboard/aktivitas': {
@@ -137,13 +123,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeCeksertifImport
       parentRoute: typeof rootRoute
     }
-    '/home/feature3': {
-      id: '/home/feature3'
-      path: '/home/feature3'
-      fullPath: '/home/feature3'
-      preLoaderRoute: typeof HomeFeature3Import
-      parentRoute: typeof rootRoute
-    }
     '/dashboard/': {
       id: '/dashboard/'
       path: '/dashboard'
@@ -158,6 +137,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeIndexImport
       parentRoute: typeof rootRoute
     }
+    '/dashboard/detail/$nib': {
+      id: '/dashboard/detail/$nib'
+      path: '/dashboard/detail/$nib'
+      fullPath: '/dashboard/detail/$nib'
+      preLoaderRoute: typeof DashboardDetailNibImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -165,108 +151,100 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/dashboard/$nib': typeof DashboardNibRoute
   '/dashboard/aktivitas': typeof DashboardAktivitasRoute
   '/dashboard/pindah_tangan': typeof DashboardPindahtanganRoute
   '/home/about': typeof HomeAboutRoute
   '/home/autentikasi': typeof HomeAutentikasiRoute
   '/home/ceksertif': typeof HomeCeksertifRoute
-  '/home/feature3': typeof HomeFeature3Route
   '/dashboard': typeof DashboardIndexRoute
   '/home': typeof HomeIndexRoute
+  '/dashboard/detail/$nib': typeof DashboardDetailNibRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/dashboard/$nib': typeof DashboardNibRoute
   '/dashboard/aktivitas': typeof DashboardAktivitasRoute
   '/dashboard/pindah_tangan': typeof DashboardPindahtanganRoute
   '/home/about': typeof HomeAboutRoute
   '/home/autentikasi': typeof HomeAutentikasiRoute
   '/home/ceksertif': typeof HomeCeksertifRoute
-  '/home/feature3': typeof HomeFeature3Route
   '/dashboard': typeof DashboardIndexRoute
   '/home': typeof HomeIndexRoute
+  '/dashboard/detail/$nib': typeof DashboardDetailNibRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/dashboard/$nib': typeof DashboardNibRoute
   '/dashboard/aktivitas': typeof DashboardAktivitasRoute
   '/dashboard/pindah_tangan': typeof DashboardPindahtanganRoute
   '/home/about': typeof HomeAboutRoute
   '/home/autentikasi': typeof HomeAutentikasiRoute
   '/home/ceksertif': typeof HomeCeksertifRoute
-  '/home/feature3': typeof HomeFeature3Route
   '/dashboard/': typeof DashboardIndexRoute
   '/home/': typeof HomeIndexRoute
+  '/dashboard/detail/$nib': typeof DashboardDetailNibRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/dashboard/$nib'
     | '/dashboard/aktivitas'
     | '/dashboard/pindah_tangan'
     | '/home/about'
     | '/home/autentikasi'
     | '/home/ceksertif'
-    | '/home/feature3'
     | '/dashboard'
     | '/home'
+    | '/dashboard/detail/$nib'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/dashboard/$nib'
     | '/dashboard/aktivitas'
     | '/dashboard/pindah_tangan'
     | '/home/about'
     | '/home/autentikasi'
     | '/home/ceksertif'
-    | '/home/feature3'
     | '/dashboard'
     | '/home'
+    | '/dashboard/detail/$nib'
   id:
     | '__root__'
     | '/'
-    | '/dashboard/$nib'
     | '/dashboard/aktivitas'
     | '/dashboard/pindah_tangan'
     | '/home/about'
     | '/home/autentikasi'
     | '/home/ceksertif'
-    | '/home/feature3'
     | '/dashboard/'
     | '/home/'
+    | '/dashboard/detail/$nib'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DashboardNibRoute: typeof DashboardNibRoute
   DashboardAktivitasRoute: typeof DashboardAktivitasRoute
   DashboardPindahtanganRoute: typeof DashboardPindahtanganRoute
   HomeAboutRoute: typeof HomeAboutRoute
   HomeAutentikasiRoute: typeof HomeAutentikasiRoute
   HomeCeksertifRoute: typeof HomeCeksertifRoute
-  HomeFeature3Route: typeof HomeFeature3Route
   DashboardIndexRoute: typeof DashboardIndexRoute
   HomeIndexRoute: typeof HomeIndexRoute
+  DashboardDetailNibRoute: typeof DashboardDetailNibRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DashboardNibRoute: DashboardNibRoute,
   DashboardAktivitasRoute: DashboardAktivitasRoute,
   DashboardPindahtanganRoute: DashboardPindahtanganRoute,
   HomeAboutRoute: HomeAboutRoute,
   HomeAutentikasiRoute: HomeAutentikasiRoute,
   HomeCeksertifRoute: HomeCeksertifRoute,
-  HomeFeature3Route: HomeFeature3Route,
   DashboardIndexRoute: DashboardIndexRoute,
   HomeIndexRoute: HomeIndexRoute,
+  DashboardDetailNibRoute: DashboardDetailNibRoute,
 }
 
 export const routeTree = rootRoute
@@ -280,22 +258,18 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/dashboard/$nib",
         "/dashboard/aktivitas",
         "/dashboard/pindah_tangan",
         "/home/about",
         "/home/autentikasi",
         "/home/ceksertif",
-        "/home/feature3",
         "/dashboard/",
-        "/home/"
+        "/home/",
+        "/dashboard/detail/$nib"
       ]
     },
     "/": {
       "filePath": "index.tsx"
-    },
-    "/dashboard/$nib": {
-      "filePath": "dashboard/$nib.tsx"
     },
     "/dashboard/aktivitas": {
       "filePath": "dashboard/aktivitas.tsx"
@@ -312,14 +286,14 @@ export const routeTree = rootRoute
     "/home/ceksertif": {
       "filePath": "home/ceksertif.tsx"
     },
-    "/home/feature3": {
-      "filePath": "home/feature3.tsx"
-    },
     "/dashboard/": {
       "filePath": "dashboard/index.tsx"
     },
     "/home/": {
       "filePath": "home/index.tsx"
+    },
+    "/dashboard/detail/$nib": {
+      "filePath": "dashboard/detail/$nib.tsx"
     }
   }
 }

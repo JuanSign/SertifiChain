@@ -35,11 +35,11 @@ function RouteComponent() {
             <thead className='bg-gradient-to-r from-[#183981] to-[#1B1741] rounded-t-2xl'>
               <tr>
                 {headers.map((header, index) => (
-                  <th key={header} className="px-4 py-2 capitalize text-white">
+                  <th key={header} className="px-10 py-2 capitalize text-white">
                     {header === 'id_transaksi' ? "ID Transaksi" : replaceUnderscores(header)}
                   </th>
                 ))}
-                <th className="px-4 py-2 capitalize text-white">Detail</th>
+                <th className="px-10 py-2 capitalize text-white">Detail</th>
               </tr>
             </thead>
             <tbody>
@@ -48,7 +48,7 @@ function RouteComponent() {
                   {Object.values(row).map((value, idx) => (
                     <td key={idx} className="border px-8 py-2 text-center">{value}</td>
                   ))}
-                  <td className="border px-4 py-2 text-center">
+                  <td className="border px-10 py-2 text-center">
                     <button  className='flex justify-center items-center'>
                       <img src="/icon/detail.png" className='h-4 w-4'/>
                     </button>

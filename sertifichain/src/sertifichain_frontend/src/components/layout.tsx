@@ -4,7 +4,6 @@ import Sidebar from "./sidebar";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const { isHome } = useRouteContext();
-  console.log(isHome);
   return (
     <div className="min-h-screen min-w-screen bg-gradient-to-b from-[#0F172A] to-[#0A0F1E]">
       <div className={`flex ${isHome ? "flex-col" : "flex-row"}`}>

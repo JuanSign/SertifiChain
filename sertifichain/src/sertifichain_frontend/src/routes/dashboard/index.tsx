@@ -16,8 +16,8 @@ interface Record {
 const headers: (keyof Record)[] = ["no", "nib", "lokasi", "luas_tanah", "jenis_hak"];
 
 const data: Record[] = [
-  { no: 1, nib: "12345", lokasi: "Jakarta", luas_tanah: "200m²", jenis_hak: "SHM" },
-  { no: 2, nib: "67890", lokasi: "Bandung", luas_tanah: "150m²", jenis_hak: "HGB" },
+  { no: 1, nib: "XX - XX - XXXXXXXX", lokasi: "Jakarta", luas_tanah: "200m²", jenis_hak: "SHM" },
+  { no: 2, nib: "XX - XX - XXXXXXXX", lokasi: "Bandung", luas_tanah: "150m²", jenis_hak: "HGB" },
 ];
 
 const page: number = 1;
@@ -33,11 +33,11 @@ function RouteComponent() {
             <thead className='bg-gradient-to-r from-[#183981] to-[#1B1741] rounded-t-2xl'>
               <tr>
                 {headers.map((header, index) => (
-                  <th key={header} className="px-4 py-2 capitalize text-white">
+                  <th key={header} className="px-10 py-2 capitalize text-white">
                     {header === 'nib' ? "NIB" : replaceUnderscores(header)}
                   </th>
                 ))}
-                <th className="px-4 py-2 capitalize text-white">Detail</th>
+                <th className="px-10 py-2 capitalize text-white">Detail</th>
               </tr>
             </thead>
             <tbody>
@@ -46,8 +46,8 @@ function RouteComponent() {
                   {Object.values(row).map((value, idx) => (
                     <td key={idx} className="border px-8 py-2 text-center">{value}</td>
                   ))}
-                  <td className="border px-4 py-2 text-center">
-                    <Link to="/dashboard/$nib" params={{ nib: data.at(index)?.nib as string }} className='flex justify-center items-center'>
+                  <td className="border px-10 py-2 text-center">
+                    <Link to="/dashboard/detail/$nib" params={{ nib: data.at(index)?.nib as string }} className='flex justify-center items-center'>
                       <img src="/icon/detail.png" className='h-4 w-4'/>
                     </Link>
                   </td>

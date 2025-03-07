@@ -33,11 +33,11 @@ function RouteComponent() {
             <thead className='bg-gradient-to-r from-[#183981] to-[#1B1741] rounded-t-2xl'>
               <tr>
                 {headers.map((header, index) => (
-                  <th key={header} className=" px-4 py-2 capitalize text-white">
+                  <th key={header} className=" px-10 py-2 capitalize text-white">
                     {header === 'nib' ? "NIB" : replaceUnderscores(header)}
                   </th>
                 ))}
-                <th className=" px-4 py-2 capitalize text-white">Aksi</th>
+                <th className=" px-10 py-2 capitalize text-white">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -46,9 +46,9 @@ function RouteComponent() {
                   {Object.values(row).map((value, idx) => (
                     <td key={idx} className="border px-8 py-2 text-center">{value}</td>
                   ))}
-                  <td className="border px-4 py-2 text-center">
-                    <Link to="/dashboard/$nib" params={{ nib: data.at(index)?.nib as string }} className='flex justify-center items-center'>
-                      <p className='bg-[linear-gradient(70deg,#1B3E88,#16326D,#102552)] px-4 py-1 text-sm rounded-md shadow shadow-gray-300'>Pilih</p>
+                  <td className="border px-10 py-2 text-center">
+                    <Link to="/dashboard" className='flex justify-center items-center'>
+                      <p className='bg-[linear-gradient(70deg,#1B3E88,#16326D,#102552)] px-10 py-1 text-sm rounded-md shadow shadow-gray-300'>Pilih</p>
                     </Link>
                   </td>
                 </tr>
