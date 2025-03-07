@@ -30,7 +30,7 @@ function RouteComponent() {
 
         <div className="overflow-x-auto mt-8 inline-block max-w-max rounded-t-2xl">
           <table className=" border-gray-300 table-auto text-white rounded-t-2xl">
-            <thead className='bg-gradient-to-r from-[#183981] to-[#1B1741] rounded-t-2xl'>
+            <thead className='bg-gradient-to-r from-[#183981] to-[#1B1741] rounded-t-2xl h-12'>
               <tr>
                 {headers.map((header, index) => (
                   <th key={header} className="px-10 py-2 capitalize text-white">
@@ -44,11 +44,11 @@ function RouteComponent() {
               {data.map((row, index) => (
                 <tr key={index}>
                   {Object.values(row).map((value, idx) => (
-                    <td key={idx} className="border px-8 py-2 text-center">{value}</td>
+                    <td key={idx} className="border px-8 py-2 text-center h-12">{value}</td>
                   ))}
                   <td className="border px-10 py-2 text-center">
                     <Link to="/dashboard/detail/$nib" params={{ nib: data.at(index)?.nib as string }} className='flex justify-center items-center'>
-                      <img src="/icon/detail.png" className='h-4 w-4'/>
+                      <img src="/icon/detail.png" className='h-5 w-5'/>
                     </Link>
                   </td>
                 </tr>

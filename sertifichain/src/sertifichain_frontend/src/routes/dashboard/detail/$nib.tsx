@@ -38,8 +38,13 @@ function RouteComponent() {
                 Riwayat Kepemilikan
                 </button>
             </div>
-
-            { showDetail ? <Sertifikat /> : <RiwayatKepemilikan/>} 
+            
+            { showDetail ? 
+                <div className='w-11/12 mt-8'>
+                    <Sertifikat /> 
+                </div>
+            : 
+                <RiwayatKepemilikan/>} 
         </div>
     );
 };

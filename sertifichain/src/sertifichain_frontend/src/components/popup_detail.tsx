@@ -1,3 +1,5 @@
+import Divider from "./divider";
+
 const PopUpDetail = ({ onClose } : { onClose: () => void }) => {
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black/60">
@@ -54,11 +56,5 @@ const PopUpDetail = ({ onClose } : { onClose: () => void }) => {
         </div>
     );
 };
-
-const Divider = () => {
-    return (
-        <hr className="w-full border-t border-gray-300 mt-2" />
-    );
-}
 
 export default PopUpDetail;

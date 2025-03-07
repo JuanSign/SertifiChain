@@ -2,8 +2,7 @@ import { ReactNode } from "@tanstack/react-router";
 
 const Sertifikat = () => {
     return (
-        <div className=' w-full mt-12 min-h-screen pr-24'>
-        <div className="w-full h-full bg-white/10 rounded-lg pt-8 pb-16 px-10 border-1 border-white/50 flex flex-col items-center space-y-8">
+        <div className="w-full h-full bg-white/10 rounded-lg pt-8 pb-16 px-10 border-1 border-white/50 flex flex-col items-center space-y-8 shadow-centered shadow-white/50">
             <img src="/icon/kop.png"/>
             <Wrapper text="NIB">
                 <p>XX - XX - XXXXXXX</p>
@@ -57,7 +56,6 @@ const Sertifikat = () => {
                 </li>
                 </ul>
             </Wrapper>
-        </div>
         </div>
     );
 };

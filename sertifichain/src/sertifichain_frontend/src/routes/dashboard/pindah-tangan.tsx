@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { replaceUnderscores } from '../../utils/string';
 
-export const Route = createFileRoute('/dashboard/pindah_tangan')({
+export const Route = createFileRoute('/dashboard/pindah-tangan')({
   component: RouteComponent,
 })
 
@@ -30,7 +30,7 @@ function RouteComponent() {
 
         <div className="overflow-x-auto mt-8 inline-block max-w-max rounded-t-2xl">
           <table className=" border-gray-300 table-auto text-white rounded-t-2xl">
-            <thead className='bg-gradient-to-r from-[#183981] to-[#1B1741] rounded-t-2xl'>
+            <thead className='bg-gradient-to-r from-[#183981] to-[#1B1741] rounded-t-2xl h-12'>
               <tr>
                 {headers.map((header, index) => (
                   <th key={header} className=" px-10 py-2 capitalize text-white">
@@ -46,8 +46,8 @@ function RouteComponent() {
                   {Object.values(row).map((value, idx) => (
                     <td key={idx} className="border px-8 py-2 text-center">{value}</td>
                   ))}
-                  <td className="border px-10 py-2 text-center">
-                    <Link to="/dashboard" className='flex justify-center items-center'>
+                  <td className="border px-10 py-2 text-center h-12">
+                    <Link to="/pindah-tangan" className='flex justify-center items-center'>
                       <p className='bg-[linear-gradient(70deg,#1B3E88,#16326D,#102552)] px-10 py-1 text-sm rounded-md shadow shadow-gray-300'>Pilih</p>
                     </Link>
                   </td>

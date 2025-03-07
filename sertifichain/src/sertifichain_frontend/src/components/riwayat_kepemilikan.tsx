@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PopUpDetail from "./popup_detail";
+import Divider from "./divider";
 
 const RiwayatKepemilikan = () => {
     const [ isOpen, setIsOpen ] = useState(false);
@@ -44,11 +45,5 @@ const ElemenRiwayat = ({ title, text, setIsOpen, secondary } : { title: string, 
         </div>
     );
 };
-
-const Divider = () => {
-    return (
-        <hr className="w-full border-t border-gray-300 mt-2" />
-    );
-}
 
 export default RiwayatKepemilikan
