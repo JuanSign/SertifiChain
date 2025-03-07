@@ -13,7 +13,7 @@ const Sidebar = () => {
     ];
 
     return (
-        <nav className="flex flex-col bg-gradient-to-b from-[#050C1B] to-[#183981] mx-8 my-8 rounded-xl shadow-centered shadow-gray-300 max-w-64 mr-12 h-screen">
+        <nav className="flex flex-col bg-gradient-to-b from-[#050C1B] to-[#183981] mx-8 my-8 rounded-xl shadow-centered shadow-white/50 max-w-64 mr-12 h-screen">
             <div className="h-full w-full bg-[url('/background/sidebar.png')] bg-cover bg-center pt-6 px-4 rounded-t-xl flex flex-col justify-between space-y-32">
                 <div className="flex flex-col space-y-4 w-full items-start">
                     <Link className="flex items-center space-x-2 ml-4 mb-16" to="/home">

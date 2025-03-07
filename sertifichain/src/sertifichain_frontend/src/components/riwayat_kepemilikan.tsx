@@ -1,7 +1,12 @@
 import { useState } from "react";
+import PopUpDetail from "./popup_detail";
 
 const RiwayatKepemilikan = () => {
     const [ isOpen, setIsOpen ] = useState(false);
+
+    const onClose = () => {
+        setIsOpen(false);
+    }
 
     return (
         <div className=' w-full mt-12 min-h-screen pr-24'>
@@ -11,7 +16,7 @@ const RiwayatKepemilikan = () => {
         <ElemenRiwayat title="[28/02/2005] Pemecahan Sertifikat" text="Detail Informasi" setIsOpen={setIsOpen}/>
 
         </div>
-        {isOpen && <PopUp setIsOpen={setIsOpen} />}
+        {isOpen && <PopUpDetail onClose={onClose} />}
         </div>
     );
 };
@@ -35,27 +40,15 @@ const ElemenRiwayat = ({ title, text, setIsOpen, secondary } : { title: string, 
                     </p>
                 </button>
             </div>
-            <hr className="w-full border-t border-gray-300 mt-2" />
+            <Divider/>
         </div>
     );
 };
 
-const PopUp = ({ setIsOpen } : { setIsOpen: (x: boolean) => void }) => {
+const Divider = () => {
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/60">
-        <div className="bg-[linear-gradient(40deg,#16326D,#4965A0)] shadow-centered  shadow-white/50 p-6 rounded-lg w-96 flex flex-col items-center text-white">
-            <img src="/icon/exit.png" className="ml-auto w-4 h-4"/>
-            <h2 className="text-lg font-bold mb-4">Detail Transaksi</h2>
-            <p>This is a popup message!</p>
-            <button 
-            className="mt-4 bg-red-500 text-white px-4 py-2 rounded-md"
-            onClick={() => setIsOpen(false)}
-            >
-            Close
-            </button>
-        </div>
-        </div>
+        <hr className="w-full border-t border-gray-300 mt-2" />
     );
-};
+}
 
 export default RiwayatKepemilikan

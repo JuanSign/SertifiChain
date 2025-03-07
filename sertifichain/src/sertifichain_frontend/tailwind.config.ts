@@ -62,7 +62,7 @@ const config: Config = {
         DEFAULT: "0 1px 3px rgba(0, 0, 0, 0.1)",
         md: "0 4px 6px rgba(0, 0, 0, 0.1)",
         lg: "0 10px 15px rgba(0, 0, 0, 0.1)",
-        'centered': '0px 0px 5px 2px rgba(0,0,0,0.3)',
+        'centered': '0px 0px 10px 5px rgba(0,0,0,0.3)',
       },
     },
   },

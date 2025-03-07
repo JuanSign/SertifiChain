@@ -1,5 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { replaceUnderscores } from '../../utils/string';
+import { useState } from 'react';
+import PopUpDetail from '../../components/popup_detail';
 
 export const Route = createFileRoute('/dashboard/aktivitas')({
   component: RouteComponent,
@@ -25,8 +27,15 @@ const data: Record[] = [
 const page: number = 1;
 
 function RouteComponent() {
+  const [ showPopup, setShowPopup ] = useState<boolean>(false);
+
+  const onClose = () => {
+    setShowPopup(false);
+  }
+  
   return (
     <div className="max-w-max">
+      { showPopup && <PopUpDetail onClose={onClose}/>}
       <div className='h-full py-16 flex flex-col'>
         <h1 className='text-white text-4xl font-bold'>Aktivitas</h1>
 
@@ -49,7 +58,7 @@ function RouteComponent() {
                     <td key={idx} className="border px-8 py-2 text-center">{value}</td>
                   ))}
                   <td className="border px-10 py-2 text-center">
-                    <button  className='flex justify-center items-center'>
+                    <button onClick={() => setShowPopup(true)}>
                       <img src="/icon/detail.png" className='h-4 w-4'/>
                     </button>
                   </td>
