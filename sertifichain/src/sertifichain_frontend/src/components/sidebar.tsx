@@ -1,10 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { useAuth } from "../hooks/auth";
 
 const username = "Joko Jempol";
 
 const Sidebar = () => {
     const [ active, setActive ] = useState("Home");
+    const { logout } = useAuth();
 
     const navItems = [
         { name: "Daftar Kepemilikan", icon: "/icon/daftar_kepemilikan.png", route: "/dashboard" },
@@ -39,7 +41,7 @@ const Sidebar = () => {
                         <img src={"/icon/profile.png"} className="w-6 h-6" />
                         <span className="whitespace-normal break-words text-sm">{username}</span>
                     </button>
-                    <button className="flex items-center space-x-3 px-4 py-2 rounded-lg transition-all hover:bg-white/10">
+                    <button onClick={logout} className="flex items-center space-x-3 px-4 py-2 rounded-lg transition-all hover:bg-white/10">
                         <img src={"/icon/logout.png"} className="w-6 h-6" />
                         <span className="whitespace-normal break-words text-sm">Log Out</span>
                     </button>
