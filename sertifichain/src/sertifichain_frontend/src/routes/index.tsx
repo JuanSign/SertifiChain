@@ -5,7 +5,7 @@ const RouteComponent = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate({ to: "/home/autentikasi" });
+    navigate({ to: "/home" });
   }, [navigate]);
 
   return null;
