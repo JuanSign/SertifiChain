@@ -14,5 +14,11 @@
   "type": "module",
   "workspaces": [
     "src/sertifichain_frontend"
-  ]
+  ],
+  "dependencies": {
+    "@dfinity/auth-client": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.9"
+  }
 }

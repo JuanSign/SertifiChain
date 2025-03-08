@@ -1,16 +1,92 @@
+import { AuthClient } from "@dfinity/auth-client";
 import { useEffect, useState } from "react";
+import { sertifichain_backend } from "../../../declarations/sertifichain_backend";
+import { Actor } from "@dfinity/agent";
 
 const NavBar = () => {
     const [activeHash, setActiveHash] = useState(window.location.hash || "#about");
+    const [authClient, setAuthClient] = useState<AuthClient | null>(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [principal, setPrincipal] = useState("");
+
+    /**
+     * Get the correct Internet Identity URL based on the current environment
+    */
+    const identityProvider = () => {
+        console.log(import.meta.env.DFX_NETWORK);
+        console.log(import.meta.env.CANISTER_ID_INTERNET_IDENTITY);
+        if (import.meta.env.VITE_DFX_NETWORK === "local") {
+        return `http://${import.meta.env.VITE_CANISTER_ID_INTERNET_IDENTITY}.localhost:4943`;
+        } else if (import.meta.env.VITE_DFX_NETWORK === "ic") {
+        return `https://${import.meta.env.VITE_CANISTER_ID_INTERNET_IDENTITY}.ic0.app`;
+        } else {
+        return `https://${import.meta.env.VITE_CANISTER_ID_INTERNET_IDENTITY}.dfinity.network`;
+        }
+    };
+
+    /**
+     * Replace backend actor identity with the identity from AuthClient
+     */
+    const onIdentityUpdate = async (client: AuthClient) => {
+        if (!client) return;
+
+        const identity = client.getIdentity();
+        const agent = Actor.agentOf(sertifichain_backend);
+
+        if (agent) {
+            agent.replaceIdentity?.(identity);
+        }
+
+        setIsAuthenticated(await client.isAuthenticated());
+        setPrincipal(identity.getPrincipal().toText());
+    };
+
+    /**
+     * Create AuthClient and load session if available
+     */
+    const createAuthClient = async () => {
+        const client = await AuthClient.create();
+        setAuthClient(client);
+        await onIdentityUpdate(client);
+    };
+
+    /**
+     * Login with AuthClient
+     */
+    const handleLogin = async () => {
+        if (!authClient) return;
+
+        await new Promise<void>((resolve, reject) =>
+        authClient.login({
+            identityProvider: identityProvider(),
+            onSuccess: resolve,
+            onError: reject,
+        })
+        );
+
+        await onIdentityUpdate(authClient);
+    };
+
+    /**
+     * Logout with AuthClient
+     */
+    const handleLogout = async () => {
+        if (authClient) {
+        await authClient.logout();
+        setIsAuthenticated(false);
+        setPrincipal("");
+        }
+    };
 
     useEffect(() => {
-        const handleHashChange = () => {
-            setActiveHash(window.location.hash);
-        };
+            createAuthClient();
+            const handleHashChange = () => {
+                setActiveHash(window.location.hash);
+            };
 
-        window.addEventListener("hashchange", handleHashChange);
-        return () => window.removeEventListener("hashchange", handleHashChange);
-    }, []);
+            window.addEventListener("hashchange", handleHashChange);
+            return () => window.removeEventListener("hashchange", handleHashChange);
+        }, []);
 
     const handleScroll = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, targetId: string) => {
         event.preventDefault();
@@ -49,7 +125,7 @@ const NavBar = () => {
                     );
                 })}
             </div>
-
+            {isAuthenticated ? (
             <div className="flex-1 flex justify-end space-x-4">
                 <button>
                     <img src="/notification.png" alt="Notification" className="w-6 h-6" />
@@ -58,6 +134,12 @@ const NavBar = () => {
                     <img src="/account.png" alt="Account" className="w-6 h-6" />
                 </a>
             </div>
+            ) : (
+                <button onClick={handleLogin}>
+                    <img src="/connect.svg" alt="" />
+                    <div>Connect</div>
+                </button>
+            )}
         </nav>
     );
 };
