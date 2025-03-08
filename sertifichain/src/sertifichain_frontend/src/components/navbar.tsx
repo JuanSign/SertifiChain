@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 const NavBar = () => {
@@ -37,7 +38,8 @@ const NavBar = () => {
                 {["about", "tech", "feature", "FAQ"].map((item) => {
                     const itemHash = `#${item}`;
                     return (
-                        <a
+                        <Link
+                            to="/home"
                             key={item}
                             href={itemHash}
                             onClick={(e) => handleScroll(e, item)}
@@ -45,9 +47,17 @@ const NavBar = () => {
                                 }`}
                         >
                             {item.charAt(0).toUpperCase() + item.slice(1)}
-                        </a>
+                        </Link>
                     );
                 })}
+                <Link
+                    to="/home/cek-sertifikat"
+                    onClick={() => (setActiveHash(""))}
+                    className={`relative transition-all duration-300 ${isActive("cek-sertifikat") ? "text-blue-500 font-bold after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-full after:h-[3px] after:bg-blue-500 after:rounded-full" : "text-white"
+                        }`}
+                    >
+                    Cek Sertifikat
+                </Link>
             </div>
 
             <div className="flex-1 flex justify-end space-x-4">
