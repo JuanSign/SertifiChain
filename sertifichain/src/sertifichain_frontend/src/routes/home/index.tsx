@@ -129,7 +129,7 @@ function LandingPage() {
               Sapien pulvinar porttitor fames pellentesque morbi.. Tristique sed id porta suspendisse vitae..
               Fusce ac donec id sed amet aenean scelerisque.
             </p>
-            <Link to="/home/cek-sertifikat" className="relative mt-4 w-[240px] px-6 py-3 rounded-lg bg-gradient-to-r from-[#152F55] to-[#1B3D83] 
+            <Link to="/cek-sertifikat" className="relative mt-4 w-[240px] px-6 py-3 rounded-lg bg-gradient-to-r from-[#152F55] to-[#1B3D83] 
                          text-[15px] text-white font-medium shadow-md shadow-[#0D1D3D]/50 hover:scale-105 transition 
                          border border-gray-500/50 flex justify-center items-center text-center whitespace-nowrap 
                          before:absolute before:inset-0 before:rounded-lg before:border before:border-[#1B3D83]/50 

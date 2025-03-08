@@ -4,8 +4,11 @@ import { useEffect, useState, useRef } from "react";
 import { sertifichain_backend } from "../../../declarations/sertifichain_backend";
 import { Actor } from "@dfinity/agent";
 import { Link } from "@tanstack/react-router";
+import { useRouteContext } from "../context/globalContext";
 
 const NavBar = () => {
+    const { firstRoute } = useRouteContext();
+
     const [activeHash, setActiveHash] = useState(window.location.hash || "#about");
     const [authClient, setAuthClient] = useState<AuthClient | null>(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -118,31 +121,33 @@ const NavBar = () => {
                 <a href="/home" className="text-2xl font-bold text-white">Sertifichain</a>
             </div>
 
-            <div className="flex space-x-8 absolute left-1/2 transform -translate-x-1/2">
-                {["about", "tech", "feature", "FAQ"].map((item) => {
-                    const itemHash = `#${item}`;
-                    return (
-                        <Link
-                            to="/home"
-                            key={item}
-                            href={itemHash}
-                            onClick={(e) => handleScroll(e, item)}
-                            className={`relative transition-all duration-300 ${isActive(item) ? "text-blue-500 font-bold after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-full after:h-[3px] after:bg-blue-500 after:rounded-full" : "text-white"
-                                }`}
-                        >
-                            {item.charAt(0).toUpperCase() + item.slice(1)}
-                        </Link>
-                    );
-                })}
-                <Link
-                    to="/home/cek-sertifikat"
-                    onClick={() => (setActiveHash(""))}
-                    className={`relative transition-all duration-300 ${isActive("cek-sertifikat") ? "text-blue-500 font-bold after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-full after:h-[3px] after:bg-blue-500 after:rounded-full" : "text-white"
-                        }`}
+            {firstRoute === "home" ? (
+                <div className="flex space-x-8 absolute left-1/2 transform -translate-x-1/2">
+                    {["about", "tech", "feature", "FAQ"].map((item) => {
+                        const itemHash = `#${item}`;
+                        return (
+                            <Link
+                                to="/home"
+                                key={item}
+                                href={itemHash}
+                                onClick={(e) => handleScroll(e, item)}
+                                className={`relative transition-all duration-300 ${isActive(item) ? "text-blue-500 font-bold after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-full after:h-[3px] after:bg-blue-500 after:rounded-full" : "text-white"
+                                    }`}
+                            >
+                                {item.charAt(0).toUpperCase() + item.slice(1)}
+                            </Link>
+                        );
+                    })}
+                    <Link
+                        to="/cek-sertifikat"
+                        onClick={() => (setActiveHash(""))}
+                        className={`relative transition-all duration-300 ${isActive("cek-sertifikat") ? "text-blue-500 font-bold after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-full after:h-[3px] after:bg-blue-500 after:rounded-full" : "text-white"
+                            }`}
                     >
-                    Cek Sertifikat
-                </Link>
-            </div>
+                        Cek Sertifikat
+                    </Link>
+                </div>
+            ) : null}
 
             {isAuthenticated ? (
                 <div className="flex-1 flex justify-end space-x-4 relative">
