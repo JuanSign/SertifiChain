@@ -145,7 +145,7 @@ const NavBar = () => {
             </div>
 
             {firstRoute === "home" ? (
-                <div className="flex space-x-8 absolute left-1/2 transform -translate-x-1/2">
+                <div className="flex space-x-8 absolute left-1/2 transform -translate-x-1/2 z-10">
                     {["about", "tech", "feature", "FAQ"].map((item) => {
                         const itemHash = `#${item}`;
                         return (
