@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as SuccessImport } from './routes/success'
 import { Route as IndexImport } from './routes/index'
 import { Route as PindahTanganIndexImport } from './routes/pindah-tangan/index'
 import { Route as HomeIndexImport } from './routes/home/index'
@@ -23,6 +24,12 @@ import { Route as DashboardAktivitasImport } from './routes/dashboard/aktivitas'
 import { Route as DashboardDetailNibImport } from './routes/dashboard/detail/$nib'
 
 // Create/Update Routes
+
+const SuccessRoute = SuccessImport.update({
+  id: '/success',
+  path: '/success',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -95,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/success': {
+      id: '/success'
+      path: '/success'
+      fullPath: '/success'
+      preLoaderRoute: typeof SuccessImport
+      parentRoute: typeof rootRoute
+    }
     '/dashboard/aktivitas': {
       id: '/dashboard/aktivitas'
       path: '/dashboard/aktivitas'
@@ -165,6 +179,7 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/success': typeof SuccessRoute
   '/dashboard/aktivitas': typeof DashboardAktivitasRoute
   '/dashboard/pindah-tangan': typeof DashboardPindahTanganRoute
   '/home/about': typeof HomeAboutRoute
@@ -178,6 +193,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/success': typeof SuccessRoute
   '/dashboard/aktivitas': typeof DashboardAktivitasRoute
   '/dashboard/pindah-tangan': typeof DashboardPindahTanganRoute
   '/home/about': typeof HomeAboutRoute
@@ -192,6 +208,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/success': typeof SuccessRoute
   '/dashboard/aktivitas': typeof DashboardAktivitasRoute
   '/dashboard/pindah-tangan': typeof DashboardPindahTanganRoute
   '/home/about': typeof HomeAboutRoute
@@ -207,6 +224,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/success'
     | '/dashboard/aktivitas'
     | '/dashboard/pindah-tangan'
     | '/home/about'
@@ -219,6 +237,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/success'
     | '/dashboard/aktivitas'
     | '/dashboard/pindah-tangan'
     | '/home/about'
@@ -231,6 +250,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/success'
     | '/dashboard/aktivitas'
     | '/dashboard/pindah-tangan'
     | '/home/about'
@@ -245,6 +265,7 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SuccessRoute: typeof SuccessRoute
   DashboardAktivitasRoute: typeof DashboardAktivitasRoute
   DashboardPindahTanganRoute: typeof DashboardPindahTanganRoute
   HomeAboutRoute: typeof HomeAboutRoute
@@ -258,6 +279,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SuccessRoute: SuccessRoute,
   DashboardAktivitasRoute: DashboardAktivitasRoute,
   DashboardPindahTanganRoute: DashboardPindahTanganRoute,
   HomeAboutRoute: HomeAboutRoute,
@@ -280,6 +302,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/success",
         "/dashboard/aktivitas",
         "/dashboard/pindah-tangan",
         "/home/about",
@@ -293,6 +316,9 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/success": {
+      "filePath": "success.tsx"
     },
     "/dashboard/aktivitas": {
       "filePath": "dashboard/aktivitas.tsx"

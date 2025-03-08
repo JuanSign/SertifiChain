@@ -8,7 +8,7 @@ const Sidebar = () => {
 
     const navItems = [
         { name: "Daftar Kepemilikan", icon: "/icon/daftar_kepemilikan.png", route: "/dashboard" },
-        { name: "Pindah Tangan Sertifikat", icon: "/icon/pindah_tangan.png", route: "/dashboard/pindah_tangan" },
+        { name: "Pindah Tangan Sertifikat", icon: "/icon/pindah_tangan.png", route: "/dashboard/pindah-tangan" },
         { name: "Aktivitas", icon: "/icon/aktivitas.png", route: "/dashboard/aktivitas" }
     ];
 

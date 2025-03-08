@@ -22,7 +22,7 @@ function RouteComponent() {
   }
 
   return (
-    <div className='w-screen min-h-screen px-20 py-8 space-y-8 flex-col'>
+    <div className='max-w-screen min-h-screen px-20 py-8 space-y-8 flex-col'>
       <Link className="flex items-center space-x-2" to="/dashboard/pindah-tangan">
         <img src="/icon/back_arrow.png" className='w-2'/>
         <span className="text-md text-white underline">Pindah Tangan Sertifikat</span>
@@ -30,9 +30,9 @@ function RouteComponent() {
 
       <PindahTanganHeader state={step} />
       <div className='px-20 flex flex-col items-center'>
-        { step === 1 ? <Step1 next={nextStep}/> : null }
-        { step === 2 ? <Step2 next={nextStep} prev={prevStep}/> : null }
-        { step === 3 ? <Step3 prev={prevStep}/> : null }
+        { step === 1 && <Step1 next={nextStep}/> }
+        { step === 2 && <Step2 next={nextStep} prev={prevStep}/> }
+        { step === 3 && <Step3 next={nextStep} prev={prevStep}/> }
       </div>
      
     </div>
