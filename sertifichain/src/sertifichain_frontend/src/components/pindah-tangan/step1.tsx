@@ -1,10 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { Sertifikat } from "../sertif";
+import { Certificate, Sertifikat } from "../sertif";
 
-const Step1 = ({ next }: { next: () => void }) => {
+const Step1 = ({ next, cert }: { next: () => void, cert: Certificate | null }) => {
     return (
         <div className="w-full">
-            <Sertifikat certificate={null} />
+            <Sertifikat certificate={cert} />
             <div className="flex flex-row ml-auto mt-8 text-center text-white text-lg w-1/4 space-x-2">
                 <Link to="/dashboard/pindah-tangan" className="bg-[#FF7F00] w-1/2 rounded-md py-2">
                     <p>Batal</p>
