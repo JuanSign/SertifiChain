@@ -14,7 +14,10 @@ const NavBar = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [principal, setPrincipal] = useState("");
     const [showMenu, setShowMenu] = useState(false);
+    const [showNotification, setShowNotification] = useState<Boolean>(false);
     const menuRef = useRef<HTMLDivElement>(null);
+    const notifRef = useRef<HTMLDivElement>(null);
+
 
     const identityProvider = () => {
         if (import.meta.env.VITE_DFX_NETWORK === "local") {
@@ -38,7 +41,8 @@ const NavBar = () => {
 
         setIsAuthenticated(await client.isAuthenticated());
         setPrincipal(identity.getPrincipal().toText());
-        setShowMenu(false); // Close popup when authentication state updates
+        setShowMenu(false);
+        setShowNotification(false);
     };
 
     const createAuthClient = async () => {
@@ -60,6 +64,7 @@ const NavBar = () => {
 
         await onIdentityUpdate(authClient);
         setShowMenu(false); // Ensure menu is closed after login
+        setShowNotification(false);
     };
 
     const handleLogout = async () => {
@@ -68,6 +73,7 @@ const NavBar = () => {
             setIsAuthenticated(false);
             setPrincipal("");
             setShowMenu(false); // Close menu after logout
+            setShowNotification(false);
         }
     };
 
@@ -81,7 +87,6 @@ const NavBar = () => {
         return () => window.removeEventListener("hashchange", handleHashChange);
     }, []);
 
-    // Close popup when clicking outside
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -99,6 +104,24 @@ const NavBar = () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [showMenu]);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (notifRef.current && !notifRef.current.contains(event.target as Node)) {
+                setShowNotification(false);
+            }
+        };
+
+        if (showNotification) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [showNotification]);
 
     const handleScroll = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, targetId: string) => {
         event.preventDefault();
@@ -138,36 +161,43 @@ const NavBar = () => {
                             </Link>
                         );
                     })}
-                    <Link
-                        to="/cek-sertifikat"
-                        onClick={() => (setActiveHash(""))}
-                        className={`relative transition-all duration-300 ${isActive("cek-sertifikat") ? "text-blue-500 font-bold after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-full after:h-[3px] after:bg-blue-500 after:rounded-full" : "text-white"
-                            }`}
-                    >
-                        Cek Sertifikat
-                    </Link>
                 </div>
             ) : null}
 
             {isAuthenticated ? (
-                <div className="flex-1 flex justify-end space-x-4 relative">
+                <div className="flex-1 flex justify-end space-x-4 relative items-center">
+                    <Link
+                        to="/cek-sertifikat"
+                        className="relative transition-all duration-300 py-1 px-2 rounded-md border-1 border-white text-white
+                        hover:before:scale-100 hover:scale-105"
+                    >
+                        Cek Sertifikat
+                    </Link>
                     {/* Notification Icon */}
-                    <button>
-                        <img src="/notification.png" alt="Notification" className="w-6 h-6" />
-                    </button>
+                    <div className="relative" ref={notifRef}>
+                        <button onClick={() => setShowNotification((prev) => (!prev))}>
+                            <img src="/notification.png" alt="Notification" className="w-6 h-6" />
+                        </button>
+                        {showNotification && (
+                            <div className="absolute top-full right-0 bg-[#102552] shadow-lg rounded-md w-40 border border-gray-200 px-2 py-4">
+                                <p className="text-white text-center">No new notifications</p>
+                            </div>
+                        )}
+                    </div>
+
 
                     {/* Account Button & Popup */}
                     <div className="relative" ref={menuRef}>
                         <button onClick={() => setShowMenu(!showMenu)}>
-                            <img src="/account.png" alt="Account" className="w-6 h-6" />
+                            <img src="/account.png" alt="Account" className="w-8 h-8" />
                         </button>
 
                         {showMenu && (
-                            <div className="absolute top-full right-0 bg-blue-700 bg-opacity-100 shadow-lg rounded-md py-2 w-40 border border-gray-200">
+                            <div className="absolute top-full right-0 bg-[#102552] shadow-lg rounded-md py-2 w-40 border border-gray-200">
                                 {/* Dashboard Option */}
                                 <a
                                     href="/dashboard"
-                                    className="flex items-center gap-2 px-4 py-2 text-white hover:bg-blue-600"
+                                    className="flex items-center gap-2 px-4 py-2 text-white hover:bg-[#282e3b]"
                                     onClick={() => setShowMenu(false)} // Close popup on click
                                 >
                                     <img src="/icon/dashboard_navbar.svg" alt="Dashboard" className="w-5 h-5" />
@@ -177,7 +207,7 @@ const NavBar = () => {
                                 {/* Logout Option */}
                                 <button
                                     onClick={handleLogout}
-                                    className="flex items-center gap-2 w-full text-left px-4 py-2 text-red-400 hover:bg-blue-600"
+                                    className="flex items-center gap-2 w-full text-left px-4 py-2 text-red-400 hover:bg-[#282e3b]"
                                 >
                                     <img src="/icon/logout_navbar.svg" alt="Logout" className="w-5 h-5" />
                                     Logout

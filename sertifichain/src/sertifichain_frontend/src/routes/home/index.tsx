@@ -16,6 +16,19 @@ export const Route = createFileRoute('/home/')({
 * asked questions, which includes three details elements.
 */
 function LandingPage() {
+  const handleScroll = (event: React.MouseEvent<HTMLElement>, targetId: string) => {
+      event.preventDefault();
+
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+          targetElement.scrollIntoView({ behavior: "smooth" });
+
+          setTimeout(() => {
+              window.location.hash = targetId;
+          }, 300);
+      }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0F172A] to-[#0A0F1E] text-white font-poppins">
 
@@ -39,7 +52,8 @@ function LandingPage() {
                    transition-all duration-300 ease-in-out overflow-hidden 
                    before:absolute before:inset-0 before:bg-gradient-to-b before:from-[#242447] before:via-[#222532] before:to-[#080C29] 
                    before:scale-0 before:transition-transform before:duration-300 before:ease-in-out 
-                   hover:before:scale-100 hover:shadow-[0px_0px_25px_4px_rgba(171,123,255,0.4)] hover:scale-105">
+                   hover:before:scale-100 hover:shadow-[0px_0px_25px_4px_rgba(171,123,255,0.4)] hover:scale-105"
+                onClick={(e) => (handleScroll(e, "tech"))}>
           <span className="relative z-10">Let’s Get Started</span>
         </button>
       </section>
@@ -65,7 +79,7 @@ function LandingPage() {
            * A smart contract is a self-executing contract with the rules of the
            * agreement written directly into lines of code.
            */}
-          <div className="relative w-72 p-[2px] rounded-xl bg-gradient-to-tr from-white/10 via-transparent to-[#1E2432] transition-transform duration-300 hover:scale-120 border border-white/20 transition-all duration-300">
+          <div className="relative w-72 p-[2px] rounded-xl bg-gradient-to-tr from-white/10 via-transparent to-[#1E2432] hover:scale-120 border border-white/20 transition-all duration-300">
             <div className="bg-gradient-to-tr from-[#1A1A1A]/30 via-[#1A1A1A]/5 to-transparent p-6 rounded-lg text-center">
               <img src="/smartcontract.png" alt="Smart Contract" className="w-16 h-16 mx-auto opacity-80" />
               <h3 className="text-xl font-bold mt-4 text-white">Smart Contract</h3>
@@ -84,7 +98,7 @@ function LandingPage() {
            * application, and that the application is instead run by a network of
            * computers.
            */}
-          <div className="relative w-72 p-[2px] rounded-xl bg-gradient-to-tr from-white/10 via-transparent to-[#1E2432] transition-transform duration-300 hover:scale-120 border border-white/20 transition-all duration-300">
+          <div className="relative w-72 p-[2px] rounded-xl bg-gradient-to-tr from-white/10 via-transparent to-[#1E2432] hover:scale-120 border border-white/20 transition-all duration-300">
             <div className="bg-gradient-to-tr from-[#1A1A1A]/30 via-[#1A1A1A]/5 to-transparent p-6 rounded-lg text-center">
               <img src="/immutable.png" alt="Immutable" className="w-16 h-16 mx-auto opacity-80" />
               <h3 className="text-xl font-bold mt-4 text-white">Immutable</h3>
@@ -102,7 +116,7 @@ function LandingPage() {
            * Secure transactions are transactions that are protected by advanced
            * cryptography, such as encryption and digital signatures.
            */}
-          <div className="relative w-72 p-[2px] rounded-xl bg-gradient-to-tr from-white/10 via-transparent to-[#1E2432] transition-transform duration-300 hover:scale-120 border border-white/20 transition-all duration-300">
+          <div className="relative w-72 p-[2px] rounded-xl bg-gradient-to-tr from-white/10 via-transparent to-[#1E2432] hover:scale-120 border border-white/20 transition-all duration-300">
             <div className="bg-gradient-to-tr from-[#1A1A1A]/30 via-[#1A1A1A]/5 to-transparent p-6 rounded-lg text-center">
               <img src="/decentralized.png" alt="Decentralized" className="w-16 h-16 mx-auto opacity-80" />
               <h3 className="text-xl font-bold mt-4 text-white">Decentralized</h3>
@@ -145,13 +159,13 @@ function LandingPage() {
               Sapien pulvinar porttitor fames pellentesque morbi.. Tristique sed id porta suspendisse vitae..
               Fusce ac donec id sed amet aenean scelerisque.
             </p>
-            <button className="relative mt-4 w-[240px] px-6 py-3 rounded-lg bg-gradient-to-r from-[#152F55] to-[#1B3D83] 
+            <Link to="/dashboard" className="relative mt-4 w-[240px] px-6 py-3 rounded-lg bg-gradient-to-r from-[#152F55] to-[#1B3D83] 
                          text-[14px] text-white font-medium shadow-md shadow-[#0D1D3D]/50 hover:scale-105 transition 
                          border border-gray-500/50 flex justify-center items-center text-center whitespace-nowrap 
                          before:absolute before:inset-0 before:rounded-lg before:border before:border-[#1B3D83]/50 
                          before:opacity-50 before:blur-md">
               Daftar Kepemilikan
-            </button>
+            </Link>
           </div>
 
           <div className="w-[80%] md:w-[60%] p-8 rounded-[30px] shadow-lg bg-gradient-to-r from-[#2C6267] via-[#254E60] to-[#193551] text-white">
@@ -161,13 +175,13 @@ function LandingPage() {
               Sapien pulvinar porttitor fames pellentesque morbi.. Tristique sed id porta suspendisse vitae..
               Fusce ac donec id sed amet aenean scelerisque.
             </p>
-            <button className="relative mt-4 w-[240px] px-6 py-3 rounded-lg bg-gradient-to-r from-[#152F55] to-[#1B3D83] 
+            <Link to="/dashboard/pindah-tangan" className="relative mt-4 w-[240px] px-6 py-3 rounded-lg bg-gradient-to-r from-[#152F55] to-[#1B3D83] 
                          text-[13px] text-white font-medium shadow-md shadow-[#0D1D3D]/50 hover:scale-105 transition 
                          border border-gray-500/50 flex justify-center items-center text-center whitespace-nowrap 
                          before:absolute before:inset-0 before:rounded-lg before:border before:border-[#1B3D83]/50 
                          before:opacity-50 before:blur-md">
               Pindah Tangan Sertifikat
-            </button>
+            </Link >
           </div>
 
         </div>
