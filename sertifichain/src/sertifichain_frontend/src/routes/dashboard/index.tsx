@@ -1,72 +1,104 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { replaceUnderscores } from '../../utils/string';
+import { useEffect, useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { replaceUnderscores } from "../../utils/string";
+import { sertifichain_backend } from "../../../../declarations/sertifichain_backend";
+import { Principal } from "@dfinity/principal"; // Import Principal
 
-export const Route = createFileRoute('/dashboard/')({
+export const Route = createFileRoute("/dashboard/")({
   component: RouteComponent,
-})
+});
 
-interface Record {
-  no: number,
-  nib: string,
-  lokasi: string,
-  luas_tanah: string,
-  jenis_hak: string,
+interface Certificate {
+  nib: string;
+  iat: number;
+  own: string;
+  loc: {
+    p: string;
+    c: string;
+    d: string;
+    v: string;
+  };
+  det: {
+    n: number;
+    e: number;
+    s: number;
+    w: number;
+  };
 }
 
-const headers: (keyof Record)[] = ["no", "nib", "lokasi", "luas_tanah", "jenis_hak"];
-
-const data: Record[] = [
-  { no: 1, nib: "XX - XX - XXXXXXXX", lokasi: "Jakarta", luas_tanah: "200m²", jenis_hak: "SHM" },
-  { no: 2, nib: "XX - XX - XXXXXXXX", lokasi: "Bandung", luas_tanah: "150m²", jenis_hak: "HGB" },
-];
-
-const page: number = 1;
+const headers: (keyof Certificate)[] = ["nib", "iat", "own", "loc", "det"];
 
 function RouteComponent() {
+  const [certificates, setCertificates] = useState<Certificate[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchCertificates() {
+      try {
+        console.log(await sertifichain_backend.get_my_principal());
+
+        const certs = await sertifichain_backend.get_my_certificates();
+
+        const formattedCerts: Certificate[] = certs.map(cert => ({
+          ...cert,
+          iat: Number(cert.iat),
+        }));
+
+        setCertificates(formattedCerts);
+      } catch (err) {
+        console.error("Error fetching certificates:", err);
+        setError("Failed to load certificates.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchCertificates();
+  }, []);
+
+  if (loading) return <p className="text-white">Loading certificates...</p>;
+  if (error) return <p className="text-red-500">{error}</p>;
+
   return (
     <div className="max-w-max">
-      <div className='h-full py-16 flex flex-col'>
-        <h1 className='text-white text-4xl font-bold'>Daftar Kepemilikan</h1>
+      <div className="h-full py-16 flex flex-col">
+        <h1 className="text-white text-4xl font-bold">Daftar Kepemilikan</h1>
 
         <div className="overflow-x-auto mt-8 inline-block max-w-max rounded-t-2xl">
-          <table className=" border-gray-300 table-auto text-white rounded-t-2xl">
-            <thead className='bg-gradient-to-r from-[#183981] to-[#1B1741] rounded-t-2xl h-12'>
+          <table className="border-gray-300 table-auto text-white rounded-t-2xl">
+            <thead className="bg-gradient-to-r from-[#183981] to-[#1B1741] rounded-t-2xl h-12">
               <tr>
-                {headers.map((header, index) => (
+                {headers.map((header) => (
                   <th key={header} className="px-10 py-2 capitalize text-white">
-                    {header === 'nib' ? "NIB" : replaceUnderscores(header)}
+                    {replaceUnderscores(header)}
                   </th>
                 ))}
                 <th className="px-10 py-2 capitalize text-white">Detail</th>
               </tr>
             </thead>
             <tbody>
-              {data.map((row, index) => (
-                <tr key={index}>
-                  {Object.values(row).map((value, idx) => (
-                    <td key={idx} className="border px-8 py-2 text-center h-12">{value}</td>
-                  ))}
+              {certificates.map((cert) => (
+                <tr key={cert.nib}>
+                  <td className="border px-8 py-2 text-center h-12">{cert.nib}</td>
+                  <td className="border px-8 py-2 text-center h-12">{cert.iat}</td>
+                  <td className="border px-8 py-2 text-center h-12">{cert.loc.c}, {cert.loc.p}</td>
+                  <td className="border px-8 py-2 text-center h-12">
+                    {cert.det.n + cert.det.e + cert.det.s + cert.det.w} m²
+                  </td>
                   <td className="border px-10 py-2 text-center">
-                    <Link to="/dashboard/detail/$nib" params={{ nib: data.at(index)?.nib as string }} className='flex justify-center items-center'>
-                      <img src="/icon/detail.png" className='h-5 w-5'/>
+                    <Link
+                      to="/dashboard/detail/$nib"
+                      params={{ nib: String(cert.nib) }}
+                      className="flex justify-center items-center"
+                    >
+                      <img src="/icon/detail.png" className="h-5 w-5" />
                     </Link>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
-
-        <div className='flex flex-row self-end mt-4 space-x-1'>
-          <button>
-            <img src='/icon/table_back.png' className='w-8 h-8'/>
-          </button>
-          <div className='bg-gradient-to-b from-[#16326D] to-[#2B61D3] w-8 h-8 rounded-md flex justify-center items-center'>
-              <p className='text-gray-200 text-center text-lg font-bold'>{page}</p>
-          </div>
-          <button>
-            <img src='/icon/table_back.png' className='w-8 h-8 scale-x-[-1]'/>
-          </button>
         </div>
       </div>
     </div>

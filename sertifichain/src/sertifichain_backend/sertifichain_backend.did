@@ -1,4 +1,29 @@
+type Certificate = record {
+  nib: text;
+  iat: nat64;
+  own: text; // Now a raw string instead of Principal
+  loc: Loc;
+  det: Det;
+};
+
+type Loc = record {
+  p: text;
+  c: text;
+  d: text;
+  v: text;
+};
+
+type Det = record {
+  n: float64;
+  e: float64;
+  s: float64;
+  w: float64;
+};
+
 service : {
-  create_certificate: (text, text, record { p: text; c: text; d: text; v: text }, record { n: float64; e: float64; s: float64; w: float64 }) -> ();
-  get_certificate: (text) -> (opt record { nib: text; iat: nat64; own: text; loc: record { p: text; c: text; d: text; v: text }; det: record { n: float64; e: float64; s: float64; w: float64 } });
+  get_my_principal: () -> (text) query;
+  create_certificate_for: (text, text, Loc, Det) -> ();
+  get_certificate: (text) -> (opt Certificate) query;
+  get_my_certificates: () -> (vec Certificate) query;
+  get_certificates_for: (text) -> (vec Certificate) query;
 }
