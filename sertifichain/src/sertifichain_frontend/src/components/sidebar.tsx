@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { useAuth } from "../hooks/auth";
 
-const username = "Joko Jempol";
+const username = "Izhar";
 
 const Sidebar = () => {
     const [ active, setActive ] = useState("Home");
