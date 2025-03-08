@@ -1,32 +1,14 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { replaceUnderscores } from "../../utils/string";
 import { sertifichain_backend } from "../../../../declarations/sertifichain_backend";
-import { Principal } from "@dfinity/principal"; // Import Principal
+import { Certificate } from '../../components/sertif';
+
 
 export const Route = createFileRoute("/dashboard/")({
   component: RouteComponent,
 });
 
-interface Certificate {
-  nib: string;
-  iat: number;
-  own: string;
-  loc: {
-    p: string;
-    c: string;
-    d: string;
-    v: string;
-  };
-  det: {
-    n: number;
-    e: number;
-    s: number;
-    w: number;
-  };
-}
-
-const headers: (keyof Certificate)[] = ["nib", "iat", "own", "loc", "det"];
+const headers = ["No", "NIB", "Location", "Issued At"];
 
 function RouteComponent() {
   const [certificates, setCertificates] = useState<Certificate[]>([]);
@@ -40,7 +22,7 @@ function RouteComponent() {
 
         const certs = await sertifichain_backend.get_my_certificates();
 
-        const formattedCerts: Certificate[] = certs.map(cert => ({
+        const formattedCerts: Certificate[] = certs.map((cert) => ({
           ...cert,
           iat: Number(cert.iat),
         }));
@@ -71,20 +53,22 @@ function RouteComponent() {
               <tr>
                 {headers.map((header) => (
                   <th key={header} className="px-10 py-2 capitalize text-white">
-                    {replaceUnderscores(header)}
+                    {header}
                   </th>
                 ))}
                 <th className="px-10 py-2 capitalize text-white">Detail</th>
               </tr>
             </thead>
             <tbody>
-              {certificates.map((cert) => (
+              {certificates.map((cert, index) => (
                 <tr key={cert.nib}>
+                  <td className="border px-8 py-2 text-center h-12">{index + 1}</td>
                   <td className="border px-8 py-2 text-center h-12">{cert.nib}</td>
-                  <td className="border px-8 py-2 text-center h-12">{cert.iat}</td>
-                  <td className="border px-8 py-2 text-center h-12">{cert.loc.c}, {cert.loc.p}</td>
                   <td className="border px-8 py-2 text-center h-12">
-                    {cert.det.n + cert.det.e + cert.det.s + cert.det.w} m²
+                    {cert.loc.c}, {cert.loc.p}
+                  </td>
+                  <td className="border px-8 py-2 text-center h-12">
+                    {new Date(cert.iat * 1000).toLocaleDateString()}
                   </td>
                   <td className="border px-10 py-2 text-center">
                     <Link
@@ -92,9 +76,10 @@ function RouteComponent() {
                       params={{ nib: String(cert.nib) }}
                       className="flex justify-center items-center"
                     >
-                      <img src="/icon/detail.png" className="h-5 w-5" />
+                      <img src="/icon/detail.png" className="h-5 w-5" alt="Detail" />
                     </Link>
                   </td>
+
                 </tr>
               ))}
             </tbody>
