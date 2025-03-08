@@ -42,7 +42,10 @@ function RouteComponent() {
                     <Sertifikat /> 
                 </div>
             : 
-                <RiwayatKepemilikan/>} 
+                <div className='pr-24'>
+                    <RiwayatKepemilikan/> 
+                </div>
+            }
         </div>
     );
 };

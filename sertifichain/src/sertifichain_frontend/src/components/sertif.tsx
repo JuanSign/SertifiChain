@@ -3,7 +3,7 @@ import Wrapper from "./wrapper";
 
 const Sertifikat = () => {
     return (
-        <div className="w-full h-full bg-white/10 rounded-lg pt-8 pb-16 px-10 border-1 border-white/50 flex flex-col items-center space-y-8 shadow-centered shadow-white/50">
+        <div className="w-full h-full bg-white/10 rounded-lg pt-8 pb-16 px-10 border-1 border-white/50 flex flex-col items-center space-y-8 shadow-centered shadow-white/50 mb-12">
             <img src="/icon/kop.png"/>
             <Wrapper text="NIB">
                 <p>XX - XX - XXXXXXX</p>

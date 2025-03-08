@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/home/')({
   component: LandingPage,
@@ -129,13 +129,13 @@ function LandingPage() {
               Sapien pulvinar porttitor fames pellentesque morbi.. Tristique sed id porta suspendisse vitae..
               Fusce ac donec id sed amet aenean scelerisque.
             </p>
-            <button className="relative mt-4 w-[240px] px-6 py-3 rounded-lg bg-gradient-to-r from-[#152F55] to-[#1B3D83] 
+            <Link to="/home/cek-sertifikat" className="relative mt-4 w-[240px] px-6 py-3 rounded-lg bg-gradient-to-r from-[#152F55] to-[#1B3D83] 
                          text-[15px] text-white font-medium shadow-md shadow-[#0D1D3D]/50 hover:scale-105 transition 
                          border border-gray-500/50 flex justify-center items-center text-center whitespace-nowrap 
                          before:absolute before:inset-0 before:rounded-lg before:border before:border-[#1B3D83]/50 
                          before:opacity-50 before:blur-md">
               Cek Sertifikat
-            </button>
+            </Link>
           </div>
 
           <div className="w-[80%] md:w-[60%] p-8 rounded-[30px] shadow-lg bg-gradient-to-r from-[#2C6267] via-[#254E60] to-[#193551] text-white">
