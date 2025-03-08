@@ -5,6 +5,11 @@ const config: Config = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      textShadow: {
+        sm: "1px 1px 2px rgba(0, 0, 0, 0.5)",
+        md: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+        lg: "3px 3px 6px rgba(0, 0, 0, 0.5)",
+      },
       colors: {
         primary: {
           DEFAULT: "var(--primary)", 
@@ -28,6 +33,7 @@ const config: Config = {
         sans: ["Inter", "sans-serif"],
         serif: ["Merriweather", "serif"],
         mono: ["Fira Code", "monospace"],
+        poppins: ["Poppins", "sans-serif"],
       },
       spacing: {
         xs: "4px",
@@ -56,6 +62,7 @@ const config: Config = {
         DEFAULT: "0 1px 3px rgba(0, 0, 0, 0.1)",
         md: "0 4px 6px rgba(0, 0, 0, 0.1)",
         lg: "0 10px 15px rgba(0, 0, 0, 0.1)",
+        'centered': '0px 0px 10px 5px rgba(0,0,0,0.3)',
       },
     },
   },

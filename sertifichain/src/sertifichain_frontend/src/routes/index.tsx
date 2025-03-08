@@ -1,13 +1,16 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import { useEffect } from 'react';
+
+const RouteComponent = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate({ to: "/home/autentikasi" });
+  }, [navigate]);
+
+  return null;
+};
 
 export const Route = createFileRoute('/')({
-  component: Index,
-})
-
-function Index() {
-  return (
-    <div className="bg-primary text-primary-foreground p-md rounded-md shadow-md">
-      <h3>Welcome Home!</h3>
-    </div>
-  )
-}
+  component: RouteComponent,
+});
