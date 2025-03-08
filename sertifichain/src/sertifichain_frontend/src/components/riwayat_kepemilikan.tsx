@@ -10,7 +10,7 @@ const RiwayatKepemilikan = () => {
     }
 
     return (
-        <div className=' w-full mt-12 min-h-screen pr-24'>
+        <div className=' w-full mt-12 min-h-screen'>
         <div className="w-full h-full bg-white/10 rounded-lg pt-8 pb-8 px-10 border-1 border-white/50 flex flex-col items-center space-y-8">
         <ElemenRiwayat title="[28/02/2005] Penerbitan Sertifikat" text="Pemerintah Indonesia" secondary="Izhar Alif Akbar" setIsOpen={setIsOpen}/>
         <ElemenRiwayat title="[28/02/2005] Pindah Tangan Sertifikat" text="Izhar Alif Akbar" secondary="Rifki Virzaya" setIsOpen={setIsOpen}/>

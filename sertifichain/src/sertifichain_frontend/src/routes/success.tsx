@@ -8,9 +8,10 @@ export const Route = createFileRoute('/success')({
 
 function RouteComponent() {
     return (
-        <div className="fixed inset-0 flex items-center justify-center">
+        <div className="fixed inset-0 flex items-center justify-center py-32">
         <div className="bg-[linear-gradient(40deg,#16326D,#4965A0)] shadow-centered  shadow-white/65 p-6 rounded-lg w-5/12 flex flex-col items-center text-white min-w-1/3 space-y-2 px-16">
-            <h2 className="text-2xl font-bold mb-8">Transaksi Berhasil</h2>
+            <h2 className="text-2xl font-bold">Transaksi Berhasil</h2>
+            <img src="/icon/check.png"/>
             <span className="flex flex-row justify-between w-full">
                 <p className="font-bold">ID Transaksi</p>
                 <p>XXXXXXX</p>

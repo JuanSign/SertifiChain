@@ -17,6 +17,7 @@ import { Route as PindahTanganIndexImport } from './routes/pindah-tangan/index'
 import { Route as HomeIndexImport } from './routes/home/index'
 import { Route as DashboardIndexImport } from './routes/dashboard/index'
 import { Route as HomeCeksertifImport } from './routes/home/ceksertif'
+import { Route as HomeCekSertifikatImport } from './routes/home/cek-sertifikat'
 import { Route as HomeAutentikasiImport } from './routes/home/autentikasi'
 import { Route as HomeAboutImport } from './routes/home/about'
 import { Route as DashboardPindahTanganImport } from './routes/dashboard/pindah-tangan'
@@ -58,6 +59,12 @@ const DashboardIndexRoute = DashboardIndexImport.update({
 const HomeCeksertifRoute = HomeCeksertifImport.update({
   id: '/home/ceksertif',
   path: '/home/ceksertif',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const HomeCekSertifikatRoute = HomeCekSertifikatImport.update({
+  id: '/home/cek-sertifikat',
+  path: '/home/cek-sertifikat',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -137,6 +144,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeAutentikasiImport
       parentRoute: typeof rootRoute
     }
+    '/home/cek-sertifikat': {
+      id: '/home/cek-sertifikat'
+      path: '/home/cek-sertifikat'
+      fullPath: '/home/cek-sertifikat'
+      preLoaderRoute: typeof HomeCekSertifikatImport
+      parentRoute: typeof rootRoute
+    }
     '/home/ceksertif': {
       id: '/home/ceksertif'
       path: '/home/ceksertif'
@@ -184,6 +198,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/pindah-tangan': typeof DashboardPindahTanganRoute
   '/home/about': typeof HomeAboutRoute
   '/home/autentikasi': typeof HomeAutentikasiRoute
+  '/home/cek-sertifikat': typeof HomeCekSertifikatRoute
   '/home/ceksertif': typeof HomeCeksertifRoute
   '/dashboard': typeof DashboardIndexRoute
   '/home': typeof HomeIndexRoute
@@ -198,6 +213,7 @@ export interface FileRoutesByTo {
   '/dashboard/pindah-tangan': typeof DashboardPindahTanganRoute
   '/home/about': typeof HomeAboutRoute
   '/home/autentikasi': typeof HomeAutentikasiRoute
+  '/home/cek-sertifikat': typeof HomeCekSertifikatRoute
   '/home/ceksertif': typeof HomeCeksertifRoute
   '/dashboard': typeof DashboardIndexRoute
   '/home': typeof HomeIndexRoute
@@ -213,6 +229,7 @@ export interface FileRoutesById {
   '/dashboard/pindah-tangan': typeof DashboardPindahTanganRoute
   '/home/about': typeof HomeAboutRoute
   '/home/autentikasi': typeof HomeAutentikasiRoute
+  '/home/cek-sertifikat': typeof HomeCekSertifikatRoute
   '/home/ceksertif': typeof HomeCeksertifRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/home/': typeof HomeIndexRoute
@@ -229,6 +246,7 @@ export interface FileRouteTypes {
     | '/dashboard/pindah-tangan'
     | '/home/about'
     | '/home/autentikasi'
+    | '/home/cek-sertifikat'
     | '/home/ceksertif'
     | '/dashboard'
     | '/home'
@@ -242,6 +260,7 @@ export interface FileRouteTypes {
     | '/dashboard/pindah-tangan'
     | '/home/about'
     | '/home/autentikasi'
+    | '/home/cek-sertifikat'
     | '/home/ceksertif'
     | '/dashboard'
     | '/home'
@@ -255,6 +274,7 @@ export interface FileRouteTypes {
     | '/dashboard/pindah-tangan'
     | '/home/about'
     | '/home/autentikasi'
+    | '/home/cek-sertifikat'
     | '/home/ceksertif'
     | '/dashboard/'
     | '/home/'
@@ -270,6 +290,7 @@ export interface RootRouteChildren {
   DashboardPindahTanganRoute: typeof DashboardPindahTanganRoute
   HomeAboutRoute: typeof HomeAboutRoute
   HomeAutentikasiRoute: typeof HomeAutentikasiRoute
+  HomeCekSertifikatRoute: typeof HomeCekSertifikatRoute
   HomeCeksertifRoute: typeof HomeCeksertifRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
   HomeIndexRoute: typeof HomeIndexRoute
@@ -284,6 +305,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardPindahTanganRoute: DashboardPindahTanganRoute,
   HomeAboutRoute: HomeAboutRoute,
   HomeAutentikasiRoute: HomeAutentikasiRoute,
+  HomeCekSertifikatRoute: HomeCekSertifikatRoute,
   HomeCeksertifRoute: HomeCeksertifRoute,
   DashboardIndexRoute: DashboardIndexRoute,
   HomeIndexRoute: HomeIndexRoute,
@@ -307,6 +329,7 @@ export const routeTree = rootRoute
         "/dashboard/pindah-tangan",
         "/home/about",
         "/home/autentikasi",
+        "/home/cek-sertifikat",
         "/home/ceksertif",
         "/dashboard/",
         "/home/",
@@ -331,6 +354,9 @@ export const routeTree = rootRoute
     },
     "/home/autentikasi": {
       "filePath": "home/autentikasi.tsx"
+    },
+    "/home/cek-sertifikat": {
+      "filePath": "home/cek-sertifikat.tsx"
     },
     "/home/ceksertif": {
       "filePath": "home/ceksertif.tsx"
