@@ -1,7 +1,8 @@
 import { createFileRoute, Link, useParams } from '@tanstack/react-router'
-import { Sertifikat } from '../../../components/sertif';
-import { useState } from 'react';
+import { Certificate, Sertifikat } from '../../../components/sertif';
+import { useEffect, useState } from 'react';
 import RiwayatKepemilikan from '../../../components/riwayat_kepemilikan';
+import { sertifichain_backend } from '../../../../../declarations/sertifichain_backend';
 
 export const Route = createFileRoute('/dashboard/detail/$nib')({
     component: RouteComponent,
@@ -9,7 +10,34 @@ export const Route = createFileRoute('/dashboard/detail/$nib')({
 
 function RouteComponent() {
     const [showDetail, setShowDetail] = useState<boolean>(true);
-    const { nib } = useParams({ strict: false })
+    const { nib } = useParams({ strict: false });
+    const [certificate, setCertificate] = useState<Certificate | null>(null);
+
+    useEffect(() => {
+        async function fetchCertificate() {
+            try {
+                if (!nib) {
+                    setCertificate(null);
+                    return;
+                }
+                const cert = await sertifichain_backend.get_certificate(nib);
+
+                if (Array.isArray(cert) && cert.length > 0) {
+                    setCertificate(cert[0] as unknown as Certificate);
+                } else {
+                    alert('Sertifikat tidak ditemukan.');
+                    setCertificate(null);
+                }
+            } catch (error) {
+                alert('Gagal mengambil sertifikat. Periksa koneksi atau coba lagi.');
+                setCertificate(null);
+            }
+        }
+
+        if (nib) {
+            fetchCertificate();
+        }
+    }, [nib]);
 
     return (
         <div className='pt-12'>
@@ -37,7 +65,7 @@ function RouteComponent() {
 
             {showDetail ?
                 <div className='w-11/12 mt-8'>
-                    <Sertifikat certificate={null} />
+                    {certificate ? <Sertifikat certificate={certificate} /> : null}
                 </div>
                 :
                 <div className='pr-24'>
