@@ -1,5 +1,5 @@
 import { AuthClient } from "@dfinity/auth-client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { sertifichain_backend } from "../../../declarations/sertifichain_backend";
 import { Actor } from "@dfinity/agent";
 
@@ -8,25 +8,19 @@ const NavBar = () => {
     const [authClient, setAuthClient] = useState<AuthClient | null>(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [principal, setPrincipal] = useState("");
+    const [showMenu, setShowMenu] = useState(false);
+    const menuRef = useRef<HTMLDivElement>(null);
 
-    /**
-     * Get the correct Internet Identity URL based on the current environment
-    */
     const identityProvider = () => {
-        console.log(import.meta.env.DFX_NETWORK);
-        console.log(import.meta.env.CANISTER_ID_INTERNET_IDENTITY);
         if (import.meta.env.VITE_DFX_NETWORK === "local") {
-        return `http://${import.meta.env.VITE_CANISTER_ID_INTERNET_IDENTITY}.localhost:4943`;
+            return `http://${import.meta.env.VITE_CANISTER_ID_INTERNET_IDENTITY}.localhost:4943`;
         } else if (import.meta.env.VITE_DFX_NETWORK === "ic") {
-        return `https://${import.meta.env.VITE_CANISTER_ID_INTERNET_IDENTITY}.ic0.app`;
+            return `https://${import.meta.env.VITE_CANISTER_ID_INTERNET_IDENTITY}.ic0.app`;
         } else {
-        return `https://${import.meta.env.VITE_CANISTER_ID_INTERNET_IDENTITY}.dfinity.network`;
+            return `https://${import.meta.env.VITE_CANISTER_ID_INTERNET_IDENTITY}.dfinity.network`;
         }
     };
 
-    /**
-     * Replace backend actor identity with the identity from AuthClient
-     */
     const onIdentityUpdate = async (client: AuthClient) => {
         if (!client) return;
 
@@ -39,54 +33,67 @@ const NavBar = () => {
 
         setIsAuthenticated(await client.isAuthenticated());
         setPrincipal(identity.getPrincipal().toText());
+        setShowMenu(false); // Close popup when authentication state updates
     };
 
-    /**
-     * Create AuthClient and load session if available
-     */
     const createAuthClient = async () => {
         const client = await AuthClient.create();
         setAuthClient(client);
         await onIdentityUpdate(client);
     };
 
-    /**
-     * Login with AuthClient
-     */
     const handleLogin = async () => {
         if (!authClient) return;
 
         await new Promise<void>((resolve, reject) =>
-        authClient.login({
-            identityProvider: identityProvider(),
-            onSuccess: resolve,
-            onError: reject,
-        })
+            authClient.login({
+                identityProvider: identityProvider(),
+                onSuccess: resolve,
+                onError: reject,
+            })
         );
 
         await onIdentityUpdate(authClient);
+        setShowMenu(false); // Ensure menu is closed after login
     };
 
-    /**
-     * Logout with AuthClient
-     */
     const handleLogout = async () => {
         if (authClient) {
-        await authClient.logout();
-        setIsAuthenticated(false);
-        setPrincipal("");
+            await authClient.logout();
+            setIsAuthenticated(false);
+            setPrincipal("");
+            setShowMenu(false); // Close menu after logout
         }
     };
 
     useEffect(() => {
-            createAuthClient();
-            const handleHashChange = () => {
-                setActiveHash(window.location.hash);
-            };
+        createAuthClient();
+        const handleHashChange = () => {
+            setActiveHash(window.location.hash);
+        };
 
-            window.addEventListener("hashchange", handleHashChange);
-            return () => window.removeEventListener("hashchange", handleHashChange);
-        }, []);
+        window.addEventListener("hashchange", handleHashChange);
+        return () => window.removeEventListener("hashchange", handleHashChange);
+    }, []);
+
+    // Close popup when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+                setShowMenu(false);
+            }
+        };
+
+        if (showMenu) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [showMenu]);
 
     const handleScroll = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, targetId: string) => {
         event.preventDefault();
@@ -125,19 +132,47 @@ const NavBar = () => {
                     );
                 })}
             </div>
+
             {isAuthenticated ? (
-            <div className="flex-1 flex justify-end space-x-4">
-                <button>
-                    <img src="/notification.png" alt="Notification" className="w-6 h-6" />
-                </button>
-                <a href="/dashboard">
-                    <img src="/account.png" alt="Account" className="w-6 h-6" />
-                </a>
-            </div>
+                <div className="flex-1 flex justify-end space-x-4 relative">
+                    {/* Notification Icon */}
+                    <button>
+                        <img src="/notification.png" alt="Notification" className="w-6 h-6" />
+                    </button>
+
+                    {/* Account Button & Popup */}
+                    <div className="relative" ref={menuRef}>
+                        <button onClick={() => setShowMenu(!showMenu)}>
+                            <img src="/account.png" alt="Account" className="w-6 h-6" />
+                        </button>
+
+                        {showMenu && (
+                            <div className="absolute top-full right-0 bg-blue-700 bg-opacity-100 shadow-lg rounded-md py-2 w-40 border border-gray-200">
+                                {/* Dashboard Option */}
+                                <a
+                                    href="/dashboard"
+                                    className="flex items-center gap-2 px-4 py-2 text-white hover:bg-blue-600"
+                                    onClick={() => setShowMenu(false)} // Close popup on click
+                                >
+                                    <img src="/icon/dashboard_navbar.svg" alt="Dashboard" className="w-5 h-5" />
+                                    Dashboard
+                                </a>
+
+                                {/* Logout Option */}
+                                <button
+                                    onClick={handleLogout}
+                                    className="flex items-center gap-2 w-full text-left px-4 py-2 text-red-400 hover:bg-blue-600"
+                                >
+                                    <img src="/icon/logout_navbar.svg" alt="Logout" className="w-5 h-5" />
+                                    Logout
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                </div>
             ) : (
-                <button onClick={handleLogin}>
-                    <img src="/connect.svg" alt="" />
-                    <div>Connect</div>
+                <button onClick={handleLogin} className="flex items-center space-x-2">
+                    <img src="/icon/connect.svg" alt="Connect" />
                 </button>
             )}
         </nav>
