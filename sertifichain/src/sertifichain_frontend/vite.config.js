@@ -9,6 +9,10 @@ import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 dotenv.config({ path: '../../.env' });
 
 export default defineConfig({
+  define: {
+    "import.meta.env.VITE_CANISTER_ID_INTERNET_IDENTITY": JSON.stringify(process.env.CANISTER_ID_INTERNET_IDENTITY),
+    "import.meta.env.VITE_DFX_NETWORK": JSON.stringify(process.env.DFX_NETWORK),
+  },
   base: "./",
   build: {
     emptyOutDir: true,
