@@ -38,15 +38,14 @@ function LandingPage() {
        * to encourage users to sign up for the service.
        */}
       <section className="flex flex-col items-center text-center px-6 py-40" id="about">
-        <h1 className="text-[64px] font-bold leading-tight">
-          Lorem ipsum dolor sit amet <br />
-          <span className="bg-gradient-to-r from-[#3355FF] to-[#69CFB5] bg-clip-text text-transparent">
+        <h1 className="text-[64px] font-bold leading-tight text-4xl">
+          Selamat datang di era baru <br />
+          <span className="bg-gradient-to-r from-[#3355FF] to-[#69CFB5] bg-clip-text text-transparent text-9xl">
             Sertifichain
           </span>
         </h1>
         <p className="text-[20px] text-gray-300 mt-10 max-w-3xl">
-          Lorem ipsum dolor sit amet consectetur. Faucibus arcu hendrerit massa in.
-          Urna nunc sed tellus quam turpis.
+          Revolusi Sertifikat Tanah: Aman, Transparan, dan Terjamin <br/> dengan Teknologi Blockchain
         </p>
         <button className="relative mt-10 px-8 py-4 text-[20px] font-semibold rounded-lg border border-white text-white 
                    transition-all duration-300 ease-in-out overflow-hidden 
@@ -139,9 +138,7 @@ function LandingPage() {
           <div className="w-[80%] md:w-[60%] p-8 rounded-[30px] shadow-lg bg-gradient-to-r from-[#2C6267] via-[#254E60] to-[#193551] text-white">
             <h3 className="text-[32px] font-bold">Cek Sertifikat</h3>
             <p className="text-white font-normal text-[16px] mt-2">
-              Lorem ipsum dolor sit amet consectetur. Risus imperdiet et proin eu ornare nibh auctor..
-              Sapien pulvinar porttitor fames pellentesque morbi.. Tristique sed id porta suspendisse vitae..
-              Fusce ac donec id sed amet aenean scelerisque.
+            Dengan fitur ini, Anda dapat memverifikasi keaslian sertifikat tanah secara instan. Cukup masukkan nomor sertifikat atau kode unik yang diberikan, dan sistem akan menampilkan informasi kepemilikan serta status legalitas tanah secara transparan dan aman.
             </p>
             <Link to="/cek-sertifikat" className="relative mt-4 w-[240px] px-6 py-3 rounded-lg bg-gradient-to-r from-[#152F55] to-[#1B3D83] 
                          text-[15px] text-white font-medium shadow-md shadow-[#0D1D3D]/50 hover:scale-105 transition 
@@ -155,9 +152,7 @@ function LandingPage() {
           <div className="w-[80%] md:w-[60%] p-8 rounded-[30px] shadow-lg bg-gradient-to-r from-[#2C6267] via-[#254E60] to-[#193551] text-white">
             <h3 className="text-[32px] font-bold">Cek Daftar Kepemilikan</h3>
             <p className="text-white font-normal text-[16px] mt-2">
-              Lorem ipsum dolor sit amet consectetur. Risus imperdiet et proin eu ornare nibh auctor..
-              Sapien pulvinar porttitor fames pellentesque morbi.. Tristique sed id porta suspendisse vitae..
-              Fusce ac donec id sed amet aenean scelerisque.
+            Fitur ini memungkinkan Anda untuk melihat daftar tanah yang terdaftar atas nama Anda. Semua properti yang telah tersertifikasi akan tercatat dalam sistem, sehingga Anda dapat dengan mudah mengelola aset tanah Anda tanpa perlu dokumen fisik tambahan.
             </p>
             <Link to="/dashboard" className="relative mt-4 w-[240px] px-6 py-3 rounded-lg bg-gradient-to-r from-[#152F55] to-[#1B3D83] 
                          text-[14px] text-white font-medium shadow-md shadow-[#0D1D3D]/50 hover:scale-105 transition 
@@ -171,9 +166,7 @@ function LandingPage() {
           <div className="w-[80%] md:w-[60%] p-8 rounded-[30px] shadow-lg bg-gradient-to-r from-[#2C6267] via-[#254E60] to-[#193551] text-white">
             <h3 className="text-[32px] font-bold">Pindah Tangan Sertifikat</h3>
             <p className="text-white font-normal text-[16px] mt-2">
-              Lorem ipsum dolor sit amet consectetur. Risus imperdiet et proin eu ornare nibh auctor..
-              Sapien pulvinar porttitor fames pellentesque morbi.. Tristique sed id porta suspendisse vitae..
-              Fusce ac donec id sed amet aenean scelerisque.
+            Proses jual beli atau pengalihan hak kepemilikan tanah menjadi lebih mudah dan aman dengan fitur ini. Pemilik tanah dapat mentransfer sertifikat kepada pihak lain secara digital melalui sistem berbasis blockchain, memastikan transaksi yang transparan, tercatat, dan tidak dapat dipalsukan.
             </p>
             <Link to="/dashboard/pindah-tangan" className="relative mt-4 w-[240px] px-6 py-3 rounded-lg bg-gradient-to-r from-[#152F55] to-[#1B3D83] 
                          text-[13px] text-white font-medium shadow-md shadow-[#0D1D3D]/50 hover:scale-105 transition 
@@ -196,10 +189,10 @@ function LandingPage() {
         <h2 className="text-[40px] font-bold text-center text-white">Frequently Asked Questions</h2>
         <div className="mt-10 max-w-5xl mx-auto space-y-4">
           {[
-            "Question 1",
-            "Question 2",
-            "Question 3",
-            "Question 4",
+            "Apa itu sertifikat tanah digital berbasis blockchain?",
+            "Apakah sertifikat tanah digital ini resmi dan diakui pemerintah?",
+            "Bagaimana cara saya mendapatkan sertifikat tanah digital ini?",
+            "Apakah saya masih bisa menggunakan sertifikat tanah fisik?",
           ].map((faq, index) => (
             <details
               key={index}
