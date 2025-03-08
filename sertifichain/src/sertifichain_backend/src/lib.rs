@@ -3,7 +3,6 @@ use ic_cdk_macros::{init, query, update};
 use ic_cdk::storage;
 use serde::Serialize;
 use std::collections::HashMap;
-use std::time::{SystemTime, UNIX_EPOCH};
 
 #[derive(CandidType, Deserialize, Serialize, Clone)]
 pub struct Certificate {
@@ -40,16 +39,15 @@ fn init() {
 #[update]
 fn create_certificate(nib: String, own: String, loc: Loc, det: Det) {
     let (mut store,): (CertificateStore,) = storage::stable_restore().unwrap_or_default();
-    let iat = SystemTime::now()
-        .duration_since(UNIX_EPOCH)
-        .expect("Time went backwards")
-        .as_secs();
+
+    let iat = ic_cdk::api::time() / 1_000_000_000; 
 
     let cert = Certificate { nib: nib.clone(), iat, own, loc, det };
     store.insert(nib, cert);
 
     storage::stable_save((&store,)).unwrap();
 }
+
 
 #[query]
 fn get_certificate(nib: String) -> Option<Certificate> {
